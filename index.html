@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <title>Territorio Rosario</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Logo de la página -->
+  <link rel="icon" href="https://KokeVazquez.github.io/Territorios-Rosario/logo.png" type="image/png">
+
+  <!-- Estilos de Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+
+  <!-- Tarjeta al compartir link en WhatsApp -->
+  <meta property="og:title" content="Mapa Rosario — Territorios">
+  <meta property="og:description" content="Mapa Interactivo Congregación Rosario.">
+  <meta property="og:image" content="https://i.imgur.com/HlPcpSB.png">
+  <meta property="og:url" content="https://KokeVazquez.github.io/Territorios-Rosario/">
+  <meta property="og:type" content="website">
+</head>
+
+<style>
+  /* ===========================
+   === Base / Reset =========
+   =========================== */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* ===========================
+   === Mapa =================
+   =========================== */
+  #map {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* =====================================
+   === Menú izquierdo (selector) =======
+   ===================================== */
+  .menu {
+    position: fixed;
+    top: 1vh;
+    left: 1vw;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0);
+    padding: 0.5em;
+    border-radius: 8px;
+  }
+
+  /* =====================================
+   === Menú derecho (Área Grande + Notas)
+   ===================================== */
+  .menu-derecha {
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    /* separación entre botones para escritorio */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* === Estilos para los botones dentro de menu-derecha === */
+  .menu-derecha button {
+    padding: 1vh 2vw;
+    font-size: 1.8vh;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* =================================================
+   === Selector de meses debajo del botón Notas ===
+   === (estética igual a selectorTerritorios) ======
+   ================================================= */
+  #filtroMes {
+    padding: 1.0vh 1vw;
+    font-size: 0.8vw;
+    font-weight: bold;
+    border: 2px solid #000;
+    outline: none;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: 0.5vh;
+    /* pequeño espacio sobre el select */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 16px;
+    padding-right: 2vw;
+  }
+
+  #filtroMes:hover {
+    background-color: #ffffff;
+    color: #1f1e1e;
+    border-color: #444;
+    transform: scale(1.03);
+  }
+
+  #filtroMes:active {
+    transform: scale(0.97);
+    background-color: #222;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* ===========================
+   === Responsivo móvil ======
+   =========================== */
+  @media (max-width: 480px) {
+    .menu-derecha button {
+      font-size: 3vw !important;
+      padding: 2vh 3vw !important;
+      min-width: 100px !important;
+    }
+
+    .menu-derecha button {
+      font-size: 3vw !important;
+      /* aumentar tamaño del texto en móvil */
+      padding: 2vh 2vw !important;
+      /* más espacio dentro de los botones */
+      min-width: 100px !important;
+      /* ancho mínimo para que no se achiquen */
+    }
+
+    #selectorTerritorios,
+    #filtroMes {
+      font-size: 3vw !important;
+      padding: 2vh 1vw !important;
+      padding-right: 4vw !important;
+      background-position: right 3vw center;
+    }
+  }
+
+
+  /* ===========================
+   === Loader ===============
+   =========================== */
+  #loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #loader img {
+    width: 120px;
+    height: auto;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+  }
+
+  /* =================================
+   === Botones generales / select ==
+   ================================= */
+  #selectorTerritorios,
+  #btnAreaGrande,
+  #btnMostrarTodasNotas,
+  #btnTerritoriosTerminados {
+    padding: 1.0vh 1vw;
+    font-size: 0.8vw;
+    font-weight: bold;
+    border: 2px solid #000;
+    outline: none;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #selectorTerritorios {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 16px;
+    padding-right: 2vw;
+  }
+
+  #selectorTerritorios:hover,
+  #btnAreaGrande:hover,
+  #btnMostrarTodasNotas:hover,
+  #btnTerritoriosTerminados:hover {
+    background-color: #ffffff;
+    color: #1f1e1e;
+    border-color: #444;
+    transform: scale(1.03);
+  }
+
+  #selectorTerritorios:active,
+  #btnAreaGrande:active,
+  #btnMostrarTodasNotas:active,
+  #btnTerritoriosTerminados:active {
+    transform: scale(0.97);
+    background-color: #222;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* ===========================
+   === Otros estilos ========
+   =========================== */
+  .leaflet-draw.leaflet-control {
+    margin-top: 5vh !important;
+  }
+
+  .etiqueta-poligono {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    padding: 2px 10px;
+    font-weight: 500;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .menu-contextual {
+    background: white;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .menu-contextual button {
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: block;
+    margin: 5px 0;
+    width: 100%;
+  }
+
+  .etiquetaTerritorio {
+    background: none;
+    border-radius: 50%;
+    padding: 5px 1px;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: 0 0px 0px black;
+  }
+
+  /* ✅ Evitar zoom automático en Safari (iPhone) */
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px !important;
+  }
+</style>
+
+
+
+
+<script>
+  // 🔧 Solución automática para Safari iPhone (reset de zoom)
+  window.addEventListener("focusout", function () {
+    // Solo en dispositivos iOS
+    if (/iP(ad|hone|od)/.test(navigator.userAgent)) {
+      setTimeout(() => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        window.scrollTo(0, 0);
+        document.body.style.zoom = "1"; // fuerza recalibrar
+      }, 300);
+    }
+  });
+</script>
+
+
+
+
+
+
+<body>
+  <div class="menu">
+    <select id="selectorTerritorios" onchange="cambiarTerritorio(); setTimeout(() => this.blur(), 200);">
+      <option value="">-- Selecciona un territorio --</option>
+      <option value="territorio1">Territorio 1</option>
+      <option value="territorio2">Territorio 2</option>
+      <option value="territorio3">Territorio 3</option>
+      <option value="territorio4">Territorio 4</option>
+      <option value="territorio5">Territorio 5</option>
+      <option value="territorio6">Territorio 6</option>
+      <option value="territorio7">Territorio 7</option>
+      <option value="territorio8">Territorio 8</option>
+      <option value="territorio9">Territorio 9</option>
+      <option value="territorio10">Territorio 10</option>
+      <option value="territorio11">Territorio 11</option>
+      <option value="territorio12">Territorio 12</option>
+      <option value="territorio13">Territorio 13</option>
+      <option value="territorio14">Territorio 14</option>
+      <option value="territorio15">Territorio 15</option>
+      <option value="territorio16">Territorio 16</option>
+      <option value="territorio17">Territorio 17</option>
+      <option value="territorio18">Territorio 18</option>
+      <option value="territorio19">Territorio 19</option>
+      <option value="territorio20">Territorio 20</option>
+      <option value="territorio21">Territorio 21</option>
+      <option value="territorio22">Territorio 22</option>
+      <option value="territorio23">Territorio 23</option>
+      <option value="territorio24">Territorio 24</option>
+      <option value="territorio25">Territorio 25</option>
+      <option value="territorio26">Territorio 26</option>
+      <option value="territorio27">Territorio 27</option>
+      <option value="territorio28">Territorio 28</option>
+      <option value="territorio29">Territorio 29</option>
+      <option value="territorio30">Territorio 30</option>
+      <option value="territorio31">Territorio 31</option>
+      <option value="territorio32">Territorio 32</option>
+      <option value="territorio33">Territorio 33</option>
+      <option value="territorio34">Territorio 34</option>
+      <option value="territorio35">Territorio 35</option>
+      <option value="territorio36">Territorio 36</option>
+      <option value="territorio37">Territorio 37</option>
+      <option value="territorio38">Territorio 38</option>
+      <option value="territorio39">Territorio 39</option>
+      <option value="territorio40">Territorio 40</option>
+      <option value="territorio41">Territorio 41</option>
+      <option value="territorio42">Territorio 42</option>
+      <option value="territorio43">Territorio 43</option>
+      <option value="territorio44">Territorio 44</option>
+      <option value="territorio45">Territorio 45</option>
+      <option value="territorio46">Territorio 46</option>
+      <option value="territorio47">Territorio 47</option>
+      <option value="territorio48">Territorio 48</option>
+      <option value="territorio49">Territorio 49</option>
+      <option value="territorio50">Territorio 50</option>
+      <option value="territorio51">Territorio 51</option>
+      <option value="territorio52">Territorio 52</option>
+      <option value="territorio53">Territorio 53</option>
+      <option value="territorio54">Territorio 54</option>
+      <option value="territorio55">Territorio 55</option>
+      <option value="territorio56">Territorio 56</option>
+      <option value="territorio57">Territorio 57</option>
+      <option value="territorio58">Territorio 58</option>
+      <option value="territorio59">Territorio 59</option>
+      <option value="territorio60">Territorio 60</option>
+      <option value="territorio61">Territorio 61</option>
+      <option value="territorio62">Territorio 62</option>
+      <option value="territorio63">Territorio 63</option>
+      <option value="territorio64">Territorio 64</option>
+      <option value="territorio65">Territorio 65</option>
+      <option value="territorio66">Territorio 66</option>
+      <option value="territorio67">Territorio 67</option>
+      <option value="territorio68">Territorio 68</option>
+      <option value="territorio69">Territorio 69</option>
+      <option value="territorio70">Territorio 70</option>
+      <option value="territorio71">Territorio 71</option>
+      <option value="territorio72">Territorio 72</option>
+      <option value="territorio73">Territorio 73</option>
+      <option value="territorio74">Territorio 74</option>
+      <option value="territorio75">Territorio 75</option>
+      <option value="territorio76">Territorio 76</option>
+      <option value="territorio77">Territorio 77</option>
+      <option value="territorio78">Territorio 78</option>
+      <option value="territorio79">Territorio 79</option>
+      <option value="territorio80">Territorio 80</option>
+      <option value="territorio81">Territorio 81</option>
+      <option value="territorio82">Territorio 82</option>
+      <option value="territorio83">Territorio 83</option>
+      <option value="territorio84">Territorio 84</option>
+
+
+    </select>
+  </div>
+
+  <div class="menu-derecha">
+    <button id="btnAreaGrande">Área Grande</button>
+    <button id="btnMostrarTodasNotas" style=>Notas</button>
+    <button id="btnTerritoriosTerminados" style="display:none">Territorios terminados</button>
+    <!--QUITE EL BOTON DE EXPORTAR EXCEL PARA INTEGRARLO AL POP UP-->
+    <select id="filtroMes" style="display:none" onchange="filtrarPorMes()">
+      <option value="inicio">Inicio</option>
+      <option value="todos">Todos los meses</option>
+      <option value="01">Enero</option>
+      <option value="02">Febrero</option>
+      <option value="03">Marzo</option>
+      <option value="04">Abril</option>
+      <option value="05">Mayo</option>
+      <option value="06">Junio</option>
+      <option value="07">Julio</option>
+      <option value="08">Agosto</option>
+      <option value="09">Septiembre</option>
+      <option value="10">Octubre</option>
+      <option value="11">Noviembre</option>
+      <option value="12">Diciembre</option>
+    </select>
+  </div>
+  <!-- CUADRO DE PORCENTAJE -->
+  <div id="cuadroPorcentaje" style="
+  position: fixed;
+  bottom: clamp(12px, 2vh, 20px);
+  right: clamp(12px, 3vw, 25px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 50px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  z-index: 10000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  user-select: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+">
+    <span style="font-weight: 600; color: #333;">Avance:</span>
+    <span id="porcentajeAvance" style="
+    font-weight: bold;
+    color: #1a73e8;
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+  ">0.0%</span>
+  </div>
+
+
+
+
+
+
+
+
+
+  <!--BOTON PARA CREAR POLIGONOS-->
+
+  <!-- <button onclick="exportarPoligonos()" style="position: absolute; top: 100px; right: 20px; z-index: 1000;">
+    📤 Exportar
+  </button>
+-->
+
+
+
+
+
+  <div id="map"></div>
+  <div id="menuContextual" class="menu-contextual" style="display:none; position:absolute; z-index:2000;"></div>
+  <div id="loader">
+    <img src="JW_Logo.png" alt="Cargando..." />
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+  <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+
+
+  <script>
+
+    const TOTAL_CUADRAS = 389; // número total de polígonos/cuadras
+
+
+
+
+    // ==============================================================================================================================
+    // === Inicialización del mapa ===
+    // ==============================================================================================================================
+    var map = L.map("map", {
+      maxZoom: 22,
+      zoomControl: false,
+      doubleClickZoom: false
+    });
+    var boundsIniciales = L.latLngBounds([[28.600, -106.075], [28.618, -106.070]]);
+    map.fitBounds(boundsIniciales, { padding: [5, 5] });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap",
+      maxZoom: 22
+    }).addTo(map);
+    //========================================================================================================================================//
+
+
+
+
+
+
+
+    // ==============================================================================================================================
+    // === Variables globales ===
+    // ==============================================================================================================================
+    let territorioActivo = null;
+    window.todosLosTerritorios = [];
+    let etiquetasActivas = [];
+    window.indicadoresNotas = [];
+    var overlayGris; //Para boton de area grande==========================================================================
+
+    //========================================================================================================================================//
+
+
+
+
+
+
+
+
+    /*
+        // ================================
+        // === Notas / Capitanes ===          BORRO ESTA FUNCION Y PUEDO SEGUIR AÑADIENDO NOTAS... PENDIENTE POR INVESTIGAR
+        // ================================
+        function anadirNota(pol) {
+          let territorioId = pol._territorioId || "territorio";
+          let notasGuardadas = JSON.parse(localStorage.getItem(territorioId + "_notas") || "{}");
+          let nuevaNota = prompt("Escribe el nombre del capitán o nota:", notasGuardadas[pol._id] || "");
+          if (nuevaNota !== null) {
+            notasGuardadas[pol._id] = nuevaNota;
+            localStorage.setItem(territorioId + "_notas", JSON.stringify(notasGuardadas));
+            mostrarIndicadoresNotas();
+          }
+        }
+    
+        function mostrarNota(pol) {
+          let territorioId = pol._territorioId || "territorio";
+          let notasGuardadas = JSON.parse(localStorage.getItem(territorioId + "_notas") || "{}");
+          let nota = notasGuardadas[pol._id];
+          alert(nota ? "Capitán/nota: " + nota : "No hay información registrada.");
+        }
+    
+    */
+
+
+
+
+
+
+
+
+    // =========================================================================================================================
+    // === MOSTRAR TODAS LAS NOTAS ===
+    // =========================================================================================================================
+    let notasMostradas = false;
+
+    document.getElementById("btnMostrarTodasNotas").addEventListener("click", function () {
+      if (!notasMostradas) {
+        // Recorrer todos los territorios
+        window.todosLosTerritorios.forEach(territorio => {
+          const notasTerritorio = JSON.parse(localStorage.getItem(territorio._id + "_notas") || "{}");
+          // Recorrer todos los polígonos del territorio
+          territorio.eachLayer(function (pol) {
+            if (notasTerritorio[pol._id] && notasTerritorio[pol._id].length > 0) {
+              // Obtener centroide del polígono
+              const latlngs = pol.getLatLngs()[0];
+              const coords = latlngs.map(ll => [ll.lng, ll.lat]);
+              coords.push([coords[0][0], coords[0][1]]); // cerrar el polígono
+              const centroide = turf.centroid(turf.polygon([coords]));
+              const cLat = centroide.geometry.coordinates[1];
+              const cLng = centroide.geometry.coordinates[0];
+              // Crear marcador de nota
+              const marker = L.marker([cLat, cLng], {
+                interactive: false,
+                icon: L.divIcon({
+                  className: "indicador-nota",
+                  html: "📒",
+                  iconSize: [20, 20],
+                  iconAnchor: [10, 10]
+                })
+              }).addTo(map);
+              // Guardarlo para poder eliminarlo después
+              window.indicadoresNotas.push(marker);
+            }
+          });
+        });
+        notasMostradas = true;
+      } else {
+        // Quitar todos los íconos de notas
+        window.indicadoresNotas.forEach(m => map.removeLayer(m));
+        window.indicadoresNotas = [];
+        notasMostradas = false;
+      }
+    });
+
+
+
+
+
+
+    // =========================================================================================================================================
+    // === Botón Territorios Terminados ===
+    // =========================================================================================================================================
+
+    document.getElementById("btnTerritoriosTerminados").addEventListener("click", function () {
+
+      const mes = document.getElementById('filtroMes').value;
+      if (!mes) { alert("Selecciona primero un mes o 'Todos los meses' para mostrar los territorios terminados."); return; }
+
+      let mostrarTodos = (mes === "todos");
+
+      let mesNombre = mostrarTodos
+        ? "Todos los meses"
+        : new Date(2025, parseInt(mes) - 1).toLocaleString('es-MX', { month: 'long' });
+
+      function generarHtml() {
+        let html = `<h2 style="text-align:center; color:#333;">🗺️ Territorios terminados - ${mesNombre}</h2><hr style="margin-bottom:15px;">`;
+        let hayRegistros = false;
+        const mesesCortos = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+        window.todosLosTerritorios.forEach((territorio, tIndex) => {
+          let territorioHtml = "";
+          territorio.eachLayer(pol => {
+            if (!pol._selected && !mostrarTodos) return;
+            const registros = JSON.parse(localStorage.getItem(territorio._id + "_capitanes") || "{}");
+            (registros[pol._id] || []).forEach(reg => {
+              const partes = reg.split('| Fecha:');
+              const capitan = partes[0].replace("Capitán:", "").replace("Trabajado por:", "").trim();
+              const fecha = partes[1]?.trim();
+              if (!fecha) return;
+
+              let mesRegistro = '';
+              if (fecha.includes('-')) mesRegistro = fecha.split('-')[1];
+              else if (fecha.includes('/')) mesRegistro = fecha.split('/')[1];
+              else if (fecha.length >= 5) mesRegistro = fecha.slice(3, 5);
+
+              // ✅ Mostrar todos o filtrar por mes
+              if (mostrarTodos || mesRegistro === mes.padStart(2, '0')) {
+                if (!territorioHtml) territorioHtml += `<h3 style="margin-top:15px;color:#444;">📍 Territorio ${tIndex + 1}</h3>`;
+                const cuadraLimpia = pol._id.replace(/^.*?Cuadra(\d+).*$/i, "$1").trim();
+                let partesFecha = fecha.includes('-') ? fecha.split("-") : fecha.split("/");
+                let dia = partesFecha[0].padStart(2, "0");
+                let mesNum = parseInt(partesFecha[1], 10);
+                let anio = partesFecha[2];
+                let fechaFormateada = `${dia}-${mesesCortos[mesNum - 1] || "???"}-${anio}`;
+                territorioHtml += `<p class="registroItem" style="background:#f8f8f8;padding:8px 10px;border-radius:6px;margin:5px 0;position:relative;color:#000;"><strong>Cuadra ${cuadraLimpia}</strong> | Trabajado por: <strong style="color:red;">${capitan}</strong> | Fecha: <strong style="color:red;">${fechaFormateada}</strong></p>`;
+              }
+            });
+          });
+          if (territorioHtml) { html += territorioHtml; hayRegistros = true; }
+        });
+        if (!hayRegistros) html += "<p>No se encontraron registros para este mes.</p>";
+        html += `
+<div style="margin-top:20px; display:flex; justify-content:center; gap:15px;">
+  <button id="borrarRegistros" style="padding:12px 18px;background:#e53935;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;transition:transform 0.1s;">🗑️ Borrar registros del mes</button>
+  <button id="btnExportarExcelPopup" style="padding:12px 18px;background:#43a047;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;transition:transform 0.1s;">📤 Exportar a Excel</button>
+</div>
+`;
+        return html;
+      }
+
+      const modal = document.createElement("div");
+      modal.style.position = "fixed"; modal.style.top = 0; modal.style.left = 0; modal.style.width = "100%"; modal.style.height = "100%"; modal.style.backgroundColor = "rgba(0,0,0,0.6)"; modal.style.zIndex = 9999; modal.style.overflowY = "auto"; modal.style.backdropFilter = "blur(3px)";
+      modal.innerHTML = `<div id="contenidoModal" style="background:#fff;padding:25px;margin:60px auto;width:85%;max-width:750px;border-radius:12px;position:relative;box-shadow:0 5px 20px rgba(0,0,0,0.3);transition: all 0.3s ease;"><button id="cerrarModal" style="position:absolute;top:10px;right:10px;font-size:20px;background:none;border:none;cursor:pointer;">✖</button>${generarHtml()}</div>`;
+      document.body.appendChild(modal);
+
+      document.getElementById("cerrarModal").addEventListener("click", () => { document.body.removeChild(modal); });
+
+      // === Preparar registros filtrados para exportar Excel ===
+      let registrosFiltrados = [];
+      window.todosLosTerritorios.forEach((territorio, tIndex) => {
+        territorio.eachLayer(pol => {
+          if (!pol._selected) return;
+          const registros = JSON.parse(localStorage.getItem(territorio._id + "_capitanes") || "{}");
+          (registros[pol._id] || []).forEach(reg => {
+            const partes = reg.split('| Fecha:');
+            const capitan = partes[0].replace("Capitán:", "").replace("Trabajado por:", "").trim();
+            const fecha = partes[1]?.trim();
+            if (!fecha) return;
+
+            let mesRegistro = '';
+            if (fecha.includes('-')) mesRegistro = fecha.split('-')[1];
+            else if (fecha.includes('/')) mesRegistro = fecha.split('/')[1];
+            else if (fecha.length >= 5) mesRegistro = fecha.slice(3, 5);
+
+            if (mostrarTodos || mesRegistro === mes.padStart(2, '0')) {
+              const cuadraLimpia = pol._id.replace(/^.*?Cuadra(\d+).*$/i, "$1").trim();
+              registrosFiltrados.push([`Territorio ${tIndex + 1} / Cuadra ${cuadraLimpia}`, capitan, fecha]);
+            }
+          });
+        });
+      });
+
+      // === Asignar evento al botón Exportar a Excel ===
+      document.getElementById("btnExportarExcelPopup").addEventListener("click", () => {
+        if (registrosFiltrados.length === 0) { alert("No hay registros para exportar 😅"); return; }
+        const encabezados = ["Territorio / Cuadra", "Capitán", "Fecha"];
+        const wsData = [encabezados, ...registrosFiltrados];
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+        XLSX.utils.book_append_sheet(wb, ws, "Territorios terminados");
+        XLSX.writeFile(wb, `Territorios_${mesNombre}.xlsx`);
+      });
+
+      // === Para borrar los registros del mes seleccionado 
+      function borrarRegistrosDelMes() {
+        const btnBasura = document.getElementById("borrarRegistros");
+        btnBasura.style.transform = "translateX(5px)";
+        setTimeout(() => btnBasura.style.transform = "translateX(-5px)", 50);
+        setTimeout(() => btnBasura.style.transform = "translateX(0px)", 100);
+
+        window.todosLosTerritorios.forEach(territorio => {
+          const registros = JSON.parse(localStorage.getItem(territorio._id + "_capitanes") || "{}");
+          Object.keys(registros).forEach(polId => {
+            registros[polId] = registros[polId].filter(reg => {
+              const fecha = reg.split('| Fecha:')[1]?.trim() || '';
+              let mesRegistro = '';
+              if (fecha.includes('-')) mesRegistro = fecha.split('-')[1];
+              else if (fecha.includes('/')) mesRegistro = fecha.split('/')[1];
+              else if (fecha.length >= 5) mesRegistro = fecha.slice(3, 5);
+              return mostrarTodos ? false : mesRegistro !== mes.padStart(2, '0');
+            });
+          });
+          localStorage.setItem(territorio._id + "_capitanes", JSON.stringify(registros));
+        });
+
+        window.todosLosTerritorios.forEach(territorio => {
+          territorio.eachLayer(pol => { if (pol._selected) { pol._selected = false; pol.setStyle(pol._originalStyle); } });
+        });
+
+        filtrarPorMes();
+
+        const registrosItems = document.getElementById("contenidoModal").querySelectorAll(".registroItem");
+        registrosItems.forEach(item => {
+          const overlay = document.createElement("div");
+          overlay.style.cssText = "position:absolute;top:0;left:-100%;width:100%;height:100%;background:white;transition:left 0.5s ease;z-index:5;";
+          item.appendChild(overlay); void overlay.offsetHeight;
+          setTimeout(() => overlay.style.left = "0%", 10);
+        });
+
+        setTimeout(() => {
+          const contenidoModal = document.getElementById("contenidoModal");
+          contenidoModal.innerHTML = `<button id="cerrarModal" style="position:absolute;top:10px;right:10px;font-size:20px;background:none;border:none;cursor:pointer;">✖</button><h2 style="text-align:center;">✅ Registros del mes eliminados</h2>`;
+          document.getElementById("cerrarModal").addEventListener("click", () => { document.body.removeChild(modal); });
+        }, 700);
+      }
+
+      document.getElementById("borrarRegistros").addEventListener("click", () => {
+        const confirmar = confirm(mostrarTodos ?
+          "⚠️ Esto borrará TODOS los registros guardados. ¿Seguro que quieres continuar?" :
+          "¿Estás seguro de que quieres borrar los registros de este mes?");
+        if (confirmar) {
+          borrarRegistrosDelMes();
+        }
+      });
+
+    });
+
+    //========================================================================================================================================//
+
+
+
+
+
+
+
+
+
+
+
+
+    // ================================================================================================================================
+    // === Menú contextual ===
+    // ================================================================================================================================
+
+    // Para ocultar el menú contextual
+    function ocultarMenu() {
+      const menu = document.getElementById("menuContextual");
+      if (menu) menu.style.display = "none"; // simplemente lo esconde
+    }
+    // Para mostrar el menú contextual en la posición donde se hizo clic
+    function mostrarMenu(e, pol) {
+      ocultarMenu(); // primero se asegura de que no haya otro menú abierto
+      const menu = document.getElementById("menuContextual");
+      if (!menu) return; // si no existe el contenedor, salir
+      // Obtener coordenadas del clic o toque
+      var x = e.originalEvent.clientX || (e.originalEvent.touches && e.originalEvent.touches[0].clientX);
+      var y = e.originalEvent.clientY || (e.originalEvent.touches && e.originalEvent.touches[0].clientY);
+      // Posicionar el menú en el lugar del clic
+      menu.style.left = x + "px";
+      menu.style.top = y + "px";
+      menu.style.display = "block"; // mostrarlo
+      // Rellenar el menú con botones específicos para el polígono clickeado
+      menu.innerHTML = `
+    <button onclick="window.open('${pol._link}', '_blank'); ocultarMenu();">📍 Ubicación</button>
+    <button onclick="anadirNota(pol); ocultarMenu();">➕ Añadir nota</button>
+    <button onclick="mostrarNota(pol); ocultarMenu();">📒 Notas</button>
+  `;
+    }
+    // Para cerrar el menú si se hace clic en cualquier parte del mapa
+    map.on("click", ocultarMenu);
+
+    //========================================================================================================================================//
+
+
+
+
+
+
+
+    // ================================================================================================================================
+    // === Loader ===
+    // ================================================================================================================================
+
+    // Para mostrar un indicador de carga (loader)
+    function mostrarLoader() {
+      const loader = document.getElementById("loader"); // busca el elemento con id "loader"
+      if (loader) loader.style.display = "flex"; // lo hace visible usando display flex
+    }
+    // Para ocultar el loader
+    function ocultarLoader() {
+      const loader = document.getElementById("loader"); // busca el mismo elemento
+      if (loader) loader.style.display = "none"; // lo esconde
+    }
+    // Para mover el mapa a un área específica mostrando el loader mientras carga
+    function flyWithLoader(bounds, callback) {
+      mostrarLoader(); // primero muestra el loader
+      map.flyToBounds(bounds, { padding: [20, 20] }); // mueve/centrar el mapa suavemente a los límites indicados
+      map.once('moveend', function () { // espera a que termine la animación del mapa
+        ocultarLoader(); // oculta el loader cuando terminó
+        if (callback) callback(); // si se pasó una función, la ejecuta
+      });
+    }
+
+    //========================================================================================================================================//
+
+
+
+
+
+
+
+
+    // ====================================================REGISTRAR CAPITAN Y FILTRAR POR MES=================================================//
+
+
+
+    /*
+    
+
+    // ================================
+    // === BLOQUE 1: Registrar Capitán ===
+    // ================================
+
+    // Función para iniciar el registro de un capitán en un polígono
+    function registrarCapitan(pol) {
+      popupRegistrarCapitan(pol); // abre el popup personalizado
+    }
+
+    // Pop up, mensaje de confirmacion de registro 
+    function mostrarPopupConfirmacionCentro(mensaje) {
+      const popup = document.createElement("div");
+      popup.innerText = mensaje;
+      popup.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #4caf50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 10000;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    text-align: center;
+    max-width: 80%;
+  `;
+      document.body.appendChild(popup);
+
+      // Animación de entrada
+      setTimeout(() => {
+        popup.style.opacity = 1;
+        popup.style.transform = "translate(-50%, -50%) scale(1)";
+      }, 10);
+
+      // Desaparece después de 2 segundos
+      setTimeout(() => {
+        popup.style.opacity = 0;
+        popup.style.transform = "translate(-50%, -50%) scale(0.8)";
+        setTimeout(() => {
+          if (document.body.contains(popup)) document.body.removeChild(popup);
+        }, 300);
+      }, 2000);
+    }
+
+    // ================================
+    // === BLOQUE 2: Popup personalizado para registrar capitán ===
+    // ================================
+    function popupRegistrarCapitan(pol) {
+      const territorioId = pol._territorioId || "territorio";
+
+      // Crear el modal (popup oscuro de fondo)
+      const modal = document.createElement("div");
+      modal.style.cssText = `
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;
+    z-index: 9999;
+  `;
+
+      // Contenido del popup con inputs y botones
+      modal.innerHTML = `
+    <div style="
+      background:white; padding:25px; border-radius:12px; width:300px; text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,0.3); position:relative;
+    ">
+      <button id="cerrarPopupCapitan" style="
+        position:absolute; top:8px; right:8px; font-size:18px; border:none; background:none; cursor:pointer;">✖</button>
+      <h3 style="margin-bottom:15px;">Registrar Capitán</h3>
+      <input id="inputCapitan" placeholder="Nombre del capitán" style="width:90%; padding:6px; margin-bottom:10px;"/>
+      <input id="inputFecha" type="date" style="width:90%; padding:6px; margin-bottom:15px;"/>
+      <button id="guardarCapitan" style="
+        padding:8px 15px; background:#4caf50; color:white; border:none; border-radius:6px; cursor:pointer;
+      ">Guardar</button>
+    </div>
+  `;
+
+      document.body.appendChild(modal); // añadir popup al HTML
+
+      // ================================
+      // === Cerrar popup ===
+      // ================================
+      modal.querySelector("#cerrarPopupCapitan").addEventListener("click", () => {
+        if (document.body.contains(modal)) document.body.removeChild(modal);
+      });
+
+      // ================================
+      // === Guardar datos del capitán ===
+      // ================================
+      modal.querySelector("#guardarCapitan").addEventListener("click", () => {
+        const capitan = modal.querySelector("#inputCapitan").value.trim();
+        const fecha = modal.querySelector("#inputFecha").value.trim();
+        if (!capitan || !fecha) return alert("Ingresa nombre y fecha");
+
+        // Guardar en localStorage
+        let registros = JSON.parse(localStorage.getItem(territorioId + "_capitanes") || "{}");
+        if (!registros[pol._id]) registros[pol._id] = [];
+        registros[pol._id].push(`Capitán: ${capitan} | Fecha: ${fecha}`);
+        localStorage.setItem(territorioId + "_capitanes", JSON.stringify(registros));
+
+        // Cerrar popup
+        if (document.body.contains(modal)) document.body.removeChild(modal);
+
+        // Mostrar confirmación
+        mostrarPopupConfirmacionCentro("Capitán registrado con éxito!");
+
+        // Pintar polígono de gris indicando que está trabajado
+        pol._selected = true;
+        pol.setStyle({ color: "gray", fillColor: "gray", fillOpacity: 0.9 });
+
+        // Agregar icono de palomita en el centro del polígono
+        const latlngs = pol.getLatLngs()[0];
+        const coords = latlngs.map(ll => [ll.lng, ll.lat]);
+        coords.push([coords[0][0], coords[0][1]]);
+        const centroide = turf.centroid(turf.polygon([coords]));
+        const cLat = centroide.geometry.coordinates[1];
+        const cLng = centroide.geometry.coordinates[0];
+        const marker = L.marker([cLat, cLng], {
+          interactive: false,
+          icon: L.divIcon({
+            className: "indicador-nota",
+            html: "✅",
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+          })
+        }).addTo(map);
+        window.indicadoresNotas.push(marker);
+
+        // Refrescar filtrado por mes para actualizar iconos
+        filtrarPorMes();
+      });
+    }
+
+
+
+
+    // ================================
+    // === BLOQUE 3: Filtrar y mostrar iconos de palomita según mes y overlay gris con ventana ===
+    // ================================
+    function filtrarPorMes() {
+      const mes = document.getElementById('filtroMes').value;
+      const mostrarTodos = (mes === "todos");
+
+      // ================================
+      // Limpiar iconos anteriores
+      // ================================
+      window.indicadoresNotas.forEach(m => map.removeLayer(m));
+      window.indicadoresNotas = [];
+
+      // ================================
+      // Limpiar overlay gris previo
+      // ================================
+      if (window.overlayGris) map.removeLayer(window.overlayGris);
+
+      const mundo = [[90, -180], [90, 180], [-90, 180], [-90, -180], [90, -180]];
+      let huecos = []; // Polígonos trabajados para “ventanas”
+      let todosPoligonosTrabajados = [];
+
+      // ================================
+      // Resetear array global de selección por mes
+      // ================================
+      window.poligonosSeleccionadosPorMes = [];
+
+      // ================================
+      // Revisar todos los territorios
+      // ================================
+      window.todosLosTerritorios.forEach(territorio => {
+        const registros = JSON.parse(localStorage.getItem(territorio._id + "_capitanes") || "{}");
+
+        territorio.eachLayer(pol => {
+          let trabajadoEsteMes = false;
+
+          // Revisar si el polígono tiene registro en el mes seleccionado o en cualquier mes
+          (registros[pol._id] || []).forEach(reg => {
+            const fecha = reg.split('| Fecha:')[1]?.trim();
+            if (fecha) {
+              const mesRegistro = fecha.slice(5, 7);
+              if (mostrarTodos || mesRegistro === mes.padStart(2, '0')) {
+                trabajadoEsteMes = true;
+              }
+            }
+          });
+
+          if (trabajadoEsteMes) {
+            pol._selected = true;
+            todosPoligonosTrabajados.push(pol);
+
+            // Guardar en el array global
+            window.poligonosSeleccionadosPorMes.push(pol._id);
+
+            // Estilo resaltado para ventana
+            pol.setStyle({
+              color: "yellow",
+              weight: 5,
+              fillColor: "gray",
+              fillOpacity: 0.7
+            });
+
+            // ================================
+            // Crear icono de palomita
+            // ================================
+            const latlngs = pol.getLatLngs()[0];
+            const coords = latlngs.map(ll => [ll.lng, ll.lat]);
+            coords.push([coords[0][0], coords[0][1]]);
+            const centroide = turf.centroid(turf.polygon([coords]));
+            const cLat = centroide.geometry.coordinates[1];
+            const cLng = centroide.geometry.coordinates[0];
+
+            const marker = L.marker([cLat, cLng], {
+              interactive: false,
+              icon: L.divIcon({
+                className: "indicador-nota",
+                html: "✅",
+                iconSize: [25, 25],
+                iconAnchor: [12, 12]
+              })
+            }).addTo(map);
+
+            window.indicadoresNotas.push(marker);
+
+            // Guardar huecos para overlay gris
+            if (pol.getLatLngs) huecos.push(pol.getLatLngs()[0].map(ll => [ll.lat, ll.lng]));
+          } else {
+            pol._selected = false;
+            pol.setStyle(pol._originalStyle);
+          }
+        });
+      });
+
+      // ================================
+      // Calcular porcentaje de avance del mes (SE ACTUALIZA SIEMPRE)
+      // ================================
+      const TOTAL_CUADRAS = 389; // Cambia aquí si el número total cambia
+      const cantidadPalomitas = window.indicadoresNotas.length;
+      const porcentaje = ((cantidadPalomitas / TOTAL_CUADRAS) * 100).toFixed(2);
+      document.getElementById("porcentajeAvance").textContent = porcentaje + "%";
+
+
+      // ================================
+      // Crear overlay gris sobre todo el mapa excepto los polígonos trabajados
+      // ================================
+      if (huecos.length > 0) {
+        window.overlayGris = L.polygon([mundo, ...huecos], {
+          color: "#000",
+          fillColor: "#000",
+          fillOpacity: 0.6,
+          stroke: false,
+          interactive: false
+        }).addTo(map);
+      } else {
+        if (window.overlayGris) map.removeLayer(window.overlayGris);
+      }
+    }
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+    // =======================================================================================================================================//
+
+
+
+    // ========================================================ENFOCAR TERRITORIO============================================================//
+
+    // ================================
+    // === BLOQUE: Enfocar un territorio ===
+    // ================================
+    function enfocarTerritorio(grupo) {
+      territorioActivo = grupo;
+
+      // ================================
+      // Desactivar interacción de todos los territorios
+      // ================================
+      window.todosLosTerritorios.forEach(t => {
+        t.eachLayer(pol => {
+          pol.off('click');          // Quitar evento click previo
+          pol.off('contextmenu');    // Quitar menú contextual previo
+          pol.setStyle(pol._originalStyle); // Restaurar estilo original
+        });
+      });
+
+      // ================================
+      // Activar interacción solo en el territorio activo
+      // ================================
+      territorioActivo.eachLayer(pol => {
+        pol._territorioId = grupo._id || "territorio";
+
+        // Restaurar estilo según estado guardado (trabajado o no)
+        pol.setStyle(pol._selected
+          ? { color: "gray", fillColor: "gray", fillOpacity: 0.9 }
+          : pol._originalStyle
+        );
+
+        // Registrar eventos para el polígono activo
+        pol.off('click');
+        pol.off('contextmenu');
+        pol.on('click', function () {
+          registrarCapitan(pol); // Abre popup para registrar capitán
+        });
+        pol.on('contextmenu', function (e) {
+          mostrarMenu(e, pol, pol._notasPoligonos || {}, pol._territorioId); // Muestra menú contextual
+        });
+      });
+
+      // ================================
+      // Overlay gris sobre todo el mapa excepto el territorio activo
+      // ================================
+      if (overlayGris) map.removeLayer(overlayGris);
+
+      var mundo = [[90, -180], [90, 180], [-90, 180], [-90, -180], [90, -180]];
+      var huecos = [];
+      territorioActivo.eachLayer(pol => {
+        if (pol.getLatLngs) huecos.push(pol.getLatLngs()[0].map(ll => [ll.lat, ll.lng]));
+      });
+
+      overlayGris = L.polygon([mundo, ...huecos], {
+        color: "#000",
+        fillColor: "#000",
+        fillOpacity: 0.6,
+        stroke: false,
+        interactive: false
+      }).addTo(map);
+
+      // ================================
+      // Mostrar etiquetas de los polígonos
+      // ================================
+      mostrarEtiquetas();
+
+      // ================================
+      // Mostrar indicadores de notas (iconos) sobre el territorio activo
+      // ================================
+      mostrarIndicadoresNotas();
+    }
+
+    // =======================================================================================================================================//
+
+
+
+
+
+    // ================================================================================================================================
+    // === BLOQUE: Mostrar etiquetas de los polígonos ===
+    // ================================================================================================================================
+    function mostrarEtiquetas() {
+      // ================================
+      // Limpiar etiquetas anteriores del mapa
+      // ================================
+      etiquetasActivas.forEach(m => map.removeLayer(m));
+      etiquetasActivas = [];
+      // ================================
+      // Si no hay territorio activo, salir
+      // ================================
+      if (!territorioActivo) return;
+      // ================================
+      // Recorrer los polígonos del territorio activo
+      // ================================
+      territorioActivo.eachLayer(function (pol) {
+        if (pol._label) {
+          // Obtener coordenadas del polígono
+          let latlngs = pol.getLatLngs()[0];
+          let coords = latlngs.map(ll => [ll.lng, ll.lat]);
+          coords.push([coords[0][0], coords[0][1]]); // cerrar el polígono
+          // Calcular centroide con Turf
+          let centroide = turf.centroid(turf.polygon([coords]));
+          let cLat = centroide.geometry.coordinates[1];
+          let cLng = centroide.geometry.coordinates[0];
+          // Crear marcador tipo etiqueta en el centro del polígono
+          let marker = L.marker([cLat, cLng], {
+            interactive: false,
+            icon: L.divIcon({
+              className: "etiqueta-poligono",
+              html: pol._label,
+              iconSize: null,
+              iconAnchor: [0, 0]
+            })
+          }).addTo(map);
+          // Guardar la etiqueta para poder eliminarla después
+          etiquetasActivas.push(marker);
+        }
+      });
+    }
+    // ================================================================================================================================//
+
+
+
+
+
+
+
+
+    // ================================================================================================================================
+    // === BLOQUE: Cambiar territorio desde el select ===
+    // ================================================================================================================================
+    function cambiarTerritorio() {
+      // ================================
+      // Cerrar cualquier popup abierto en el mapa
+      // ================================
+      map.closePopup();
+      // ================================
+      // Obtener el valor seleccionado del dropdown
+      // ================================
+      var selector = document.getElementById("selectorTerritorios");
+      var valor = selector.value;
+      selector.blur(); // quitar foco del selector
+      // ================================
+      // Ocultar menú contextual y limpiar etiquetas
+      // ================================
+      ocultarMenu();
+      etiquetasActivas.forEach(m => map.removeLayer(m));
+      etiquetasActivas = [];
+      // ================================
+      // Caso "Área Grande": limpiar selección y volar al bounds inicial
+      // ================================
+      if (valor === "areaGrande") {
+        selector.value = "";       // reiniciar selector
+        territorioActivo = null;   // ningún territorio activo
+        flyWithLoader(boundsIniciales); // mover mapa a vista general
+        return;
+      }
+      // ================================
+      // Caso territorios específicos: extraer número del id
+      // ================================
+      const match = valor.match(/^territorio(\d+)$/);
+      if (match) {
+        const num = match[1];
+        const grupo = window["territorio" + num]; // obtener grupo de polígonos
+        if (grupo && grupo.getLayers().length > 0) {
+          // Volar al territorio y enfocar
+          flyWithLoader(grupo.getBounds(), function () {
+            enfocarTerritorio(grupo);
+          });
+        }
+      }
+    }
+
+    // ================================================================================================================================//
+
+
+
+
+
+    // ==========================================================================================================================
+    // === BLOQUE: Botón Área Grande ===
+    // ==========================================================================================================================
+    document.getElementById("btnAreaGrande").addEventListener("click", function () {
+      // ================================
+      // Cerrar cualquier popup abierto
+      // ================================
+      map.closePopup();
+      // ================================
+      // Limpiar selector de territorios
+      // ================================
+      document.getElementById("selectorTerritorios").value = "";
+      // ================================
+      // Ocultar menú contextual y eliminar overlay gris
+      // ================================
+      ocultarMenu();
+      if (overlayGris) {
+        map.removeLayer(overlayGris);
+        overlayGris = null;
+      }
+      // ================================
+      // Eliminar todas las etiquetas del mapa
+      // ================================
+      etiquetasActivas.forEach(m => map.removeLayer(m));
+      etiquetasActivas = [];
+      // ================================
+      // Restaurar estilo de todos los polígonos y desmarcarlos
+      // ================================
+      window.todosLosTerritorios.forEach(territorio => {
+        territorio.eachLayer(pol => {
+          pol.setStyle(pol._originalStyle);
+        });
+      });
+      // ================================
+      // Limpiar territorio activo
+      // ================================
+      territorioActivo = null;
+      // ================================
+      // Volar a vista general de todo el mapa
+      // ================================
+      flyWithLoader(boundsIniciales);
+    });
+    // ================================================================================================================================//
+
+
+
+
+
+
+
+    // ================================================================================================================================
+    // === BLOQUE: Inicializar todos los territorios automáticamente ===
+    // ================================================================================================================================
+
+    // Lista de todos los datos de los territorios
+    const listaTerritorios = [
+      datosTerritorio1, datosTerritorio2, datosTerritorio3, /* ... */ datosTerritorio84
+    ];
+    // Array global donde guardaremos todos los grupos de polígonos
+    window.todosLosTerritorios = [];
+    // Crear cada territorio y añadirlo al mapa
+    listaTerritorios.forEach(datosTerritorio => {
+      // Crear territorio con polígonos y demás datos
+      const territorioData = crearTerritorio(datosTerritorio);
+      const grupo = territorioData.grupo;
+      // Guardar grupo en array global
+      window.todosLosTerritorios.push(grupo);
+      // Tomar un polígono de referencia para colocar marcador
+      const polFijo = datosTerritorio.poligonos[1] || datosTerritorio.poligonos[0];
+      const centro = L.polygon(polFijo.coords).getBounds().getCenter();
+      // Crear marcador con número del territorio
+      const marcador = L.marker(centro, {
+        icon: L.divIcon({
+          className: "etiquetaTerritorio",
+          html: `<b>${datosTerritorio.numeroTerritorio}</b>`,
+          iconSize: [20, 20]
+        })
+      }).addTo(map);
+      // Guardar referencia del marcador dentro del grupo
+      grupo._marcadorTerritorio = marcador;
+    });
+    // ================================================================================================================================//
+
+
+
+
+
+    // ================================
+    // === BLOQUE: Filtrar al elegir mes (PC + móviles) ===
+    // ================================
+
+    // Obtener el selector de mes
+    const filtroMes = document.getElementById("filtroMes");
+    if (filtroMes) {
+      // Ejecutar filtrado inmediatamente al cambiar valor (útil en móviles)
+      filtroMes.addEventListener("input", filtrarPorMes);
+      // Ejecutar filtrado al confirmar selección (compatibilidad con PC)
+      filtroMes.addEventListener("change", filtrarPorMes);
+    }
+    // ================================================================================================================================//
+
+
+
+
+
+
+
+
+    // ================================
+    // Función para generar HTML de registros
+    // ================================
+    function generarHtml() {
+      let html = `<h2 style="text-align:center; color:#333;">🗺️ Territorios terminados - ${mesNombre}</h2><hr style="margin-bottom:15px;">`;
+      let hayRegistros = false;
+      const mesesCortos = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+      let registrosFiltrados = []; // Array para exportar Excel
+      // Revisar todos los territorios
+      window.todosLosTerritorios.forEach((territorio, tIndex) => {
+        let territorioHtml = "";
+        territorio.eachLayer(pol => {
+          if (!pol._selected) return; // Solo polígonos marcados
+          const registros = JSON.parse(localStorage.getItem(territorio._id + "_capitanes") || "{}");
+          (registros[pol._id] || []).forEach(reg => {
+            const partes = reg.split('| Fecha:');
+            const capitan = partes[0].replace("Capitán:", "").replace("Trabajado por:", "").trim();
+            const fecha = partes[1]?.trim();
+            if (!fecha) return;
+            // Extraer mes del registro
+            let mesRegistro = '';
+            if (fecha.includes('-')) mesRegistro = fecha.split('-')[1];
+            else if (fecha.includes('/')) mesRegistro = fecha.split('/')[1];
+            else if (fecha.length >= 5) mesRegistro = fecha.slice(3, 5);
+            // Solo registros del mes seleccionado
+            if (mesRegistro === mes.padStart(2, '0')) {
+              if (!territorioHtml)
+                territorioHtml += `<h3 style="margin-top:15px; color:#444;">📍 Territorio ${tIndex + 1}</h3>`;
+              // Limpiar nombre de la cuadra
+              const cuadraLimpia = pol._id.replace(/^.*?Cuadra(\d+).*$/i, "$1").trim();
+              // Formatear fecha
+              const partesFecha = fecha.split("-");
+              const dia = partesFecha[0].padStart(2, "0");
+              const mesNum = parseInt(partesFecha[1], 10);
+              const anio = partesFecha[2];
+              const mesTexto = mesesCortos[mesNum - 1] || "???";
+              const fechaFormateada = `${dia}-${mesTexto}-${anio}`;
+              // HTML de cada registro
+              territorioHtml += `<p class="registroItem" style="background:#f8f8f8; padding:8px 10px; border-radius:6px; margin:5px 0; color:#000;">
+              <strong>Cuadra ${cuadraLimpia}</strong> | Trabajado por: <strong style="color:red;">${capitan}</strong> | Fecha: <strong style="color:red;">${fechaFormateada}</strong>
+            </p>`;
+              // Guardar en array para Excel
+              registrosFiltrados.push([`Territorio ${tIndex + 1} - Cuadra ${cuadraLimpia}`, capitan, fechaFormateada]);
+              hayRegistros = true;
+            }
+          });
+        });
+        if (territorioHtml) html += territorioHtml;
+      });
+      if (!hayRegistros) html += "<p>No se encontraron registros para este mes.</p>";
+      // Botón de exportación
+      html += `<button id="btnExportarExcelPopup" style="display:block; margin:20px auto 0; padding:12px 18px; background:#2196f3; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer;">
+      📥 Exportar datos a Excel
+    </button>`;
+      return { html, registrosFiltrados };
+    }
+    const { html, registrosFiltrados } = generarHtml();
+
+
+
+
+    // ================================
+    // Crear modal para mostrar registros
+    // ================================
+    const modal = document.createElement("div");
+    modal.style.position = "fixed";
+    modal.style.top = 0;
+    modal.style.left = 0;
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.backgroundColor = "rgba(0,0,0,0.6)";
+    modal.style.zIndex = 9999;
+    modal.style.overflowY = "auto";
+    modal.style.backdropFilter = "blur(3px)";
+    modal.innerHTML = `
+    <div id="contenidoModal" style="background:#fff; padding:25px; margin:60px auto; width:85%; max-width:750px; border-radius:12px; position:relative; box-shadow:0 5px 20px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+      <button id="cerrarModal" style="position:absolute; top:10px; right:10px; font-size:20px; background:none; border:none; cursor:pointer;">✖</button>
+      ${html}
+    </div>
+  `;
+    document.body.appendChild(modal);
+    // Cerrar modal
+    document.getElementById("cerrarModal").addEventListener("click", () => {
+      document.body.removeChild(modal);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+  <!-- Archivos externos de territorios -->
+
+  <script src="dibujo.js"></script>
+
+  <script src="area_grande.js"></script>
+  <script src="territoriobase.js"></script>
+  <script src="territorio1.js"></script>
+  <script src="territorio2.js"></script>
+  <script src="territorio3.js"></script>
+  <script src="territorio4.js"></script>
+  <script src="territorio5.js"></script>
+  <script src="territorio6.js"></script>
+  <script src="territorio7.js"></script>
+  <script src="territorio8.js"></script>
+  <script src="territorio9.js"></script>
+  <script src="territorio10.js"></script>
+  <script src="territorio11.js"></script>
+  <script src="territorio12.js"></script>
+  <script src="territorio13.js"></script>
+  <script src="territorio14.js"></script>
+  <script src="territorio15.js"></script>
+  <script src="territorio16.js"></script>
+  <script src="territorio17.js"></script>
+  <script src="territorio18.js"></script>
+  <script src="territorio19.js"></script>
+  <script src="territorio20.js"></script>
+  <script src="territorio21.js"></script>
+  <script src="territorio22.js"></script>
+  <script src="territorio23.js"></script>
+  <script src="territorio24.js"></script>
+  <script src="territorio25.js"></script>
+  <script src="territorio26.js"></script>
+  <script src="territorio27.js"></script>
+  <script src="territorio28.js"></script>
+  <script src="territorio29.js"></script>
+  <script src="territorio30.js"></script>
+  <script src="territorio31.js"></script>
+  <script src="territorio32.js"></script>
+  <script src="territorio33.js"></script>
+  <script src="territorio34.js"></script>
+  <script src="territorio35.js"></script>
+  <script src="territorio36.js"></script>
+  <script src="territorio37.js"></script>
+  <script src="territorio38.js"></script>
+  <script src="territorio39.js"></script>
+  <script src="territorio40.js"></script>
+  <script src="territorio41.js"></script>
+  <script src="territorio42.js"></script>
+  <script src="territorio43.js"></script>
+  <script src="territorio44.js"></script>
+  <script src="territorio45.js"></script>
+  <script src="territorio46.js"></script>
+  <script src="territorio47.js"></script>
+  <script src="territorio48.js"></script>
+  <script src="territorio49.js"></script>
+  <script src="territorio50.js"></script>
+  <script src="territorio51.js"></script>
+  <script src="territorio52.js"></script>
+  <script src="territorio53.js"></script>
+  <script src="territorio54.js"></script>
+  <script src="territorio55.js"></script>
+  <script src="territorio56.js"></script>
+  <script src="territorio57.js"></script>
+  <script src="territorio58.js"></script>
+  <script src="territorio59.js"></script>
+  <script src="territorio60.js"></script>
+  <script src="territorio61.js"></script>
+  <script src="territorio62.js"></script>
+  <script src="territorio63.js"></script>
+  <script src="territorio64.js"></script>
+  <script src="territorio65.js"></script>
+  <script src="territorio66.js"></script>
+  <script src="territorio67.js"></script>
+  <script src="territorio68.js"></script>
+  <script src="territorio69.js"></script>
+  <script src="territorio70.js"></script>
+  <script src="territorio71.js"></script>
+  <script src="territorio72.js"></script>
+  <script src="territorio73.js"></script>
+  <script src="territorio74.js"></script>
+  <script src="territorio75.js"></script>
+  <script src="territorio76.js"></script>
+  <script src="territorio77.js"></script>
+  <script src="territorio78.js"></script>
+  <script src="territorio79.js"></script>
+  <script src="territorio80.js"></script>
+  <script src="territorio81.js"></script>
+  <script src="territorio82.js"></script>
+  <script src="territorio83.js"></script>
+  <script src="territorio84.js"></script>
+  <script src="territorionegocios.js"></script>
+
+
+</body>
+
+</html>
