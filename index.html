@@ -1981,7 +1981,7 @@
       // Abrir/cerrar el select al hacer click
       selected.addEventListener("click", (e) => {
         e.stopPropagation();
-        closeAllCustomSelects(customSelect); // Cierra los demás antes de abrir
+        closeAllCustomSelects(customSelect); // Cierra los demás antes de abrir este
         customSelect.classList.toggle("active");
       });
 
@@ -1993,26 +1993,37 @@
           selected.textContent = opt.textContent;
           originalSelect.value = value;
           customSelect.classList.remove("active");
-          callback(value); // Llama la función asociada (filtrarPorMes o cambiarTerritorio)
+          callback(value); // Ejecuta la función asignada
         });
       });
 
-      // Evitar rebote de scroll en móviles
+      // Evitar rebote de scroll en móviles dentro de la lista
       const optionsContainer = customSelect.querySelector(".options");
       optionsContainer.addEventListener("touchmove", (e) => {
         e.stopPropagation();
       }, { passive: false });
     }
 
-    // Cerrar todos los selects al hacer click fuera
+    // ====================
+    // FUNCION PARA CERRAR TODOS LOS SELECTS
+    // ====================
+
     function closeAllCustomSelects(exception = null) {
       document.querySelectorAll(".custom-select").forEach(sel => {
         if (sel !== exception) sel.classList.remove("active");
       });
     }
 
-    document.addEventListener("click", () => closeAllCustomSelects());
-    document.addEventListener("touchstart", () => closeAllCustomSelects());
+    // ====================
+    // CERRAR SELECTS AL TOCAR FUERA (click o touch)
+    // ====================
+
+    ["click", "touchstart"].forEach(evt =>
+      document.addEventListener(evt, (e) => {
+        // Si el toque/click no está dentro de un custom-select → cerramos todos
+        if (!e.target.closest(".custom-select")) closeAllCustomSelects();
+      })
+    );
 
     // ====================
     // INICIALIZACIÓN
@@ -2020,6 +2031,7 @@
 
     initCustomSelect("customFiltroMes", "filtroMes", filtrarPorMes);
     initCustomSelect("customSelectorTerritorios", "selectorTerritorios", cambiarTerritorio);
+
 
 
 
