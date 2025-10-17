@@ -1438,15 +1438,15 @@
           : pol._originalStyle
         );
 
-        /* // Registrar eventos para el polígono activo
-         pol.off('click');
-         pol.off('contextmenu');
-         pol.on('click', function () {
-           registrarCapitan(pol); // Abre popup para registrar capitán
-         });
-         pol.on('contextmenu', function (e) {
-           mostrarMenu(e, pol, pol._notasPoligonos || {}, pol._territorioId); // Muestra menú contextual
-         });*/
+        // Registrar eventos para el polígono activo
+        /*pol.off('click');
+        pol.off('contextmenu');
+        pol.on('click', function () {
+          registrarCapitan(pol); // Abre popup para registrar capitán
+        });*/
+        pol.on('contextmenu', function (e) {
+          mostrarMenu(e, pol, pol._notasPoligonos || {}, pol._territorioId); // Muestra menú contextual
+        });
       });
 
       // ================================
