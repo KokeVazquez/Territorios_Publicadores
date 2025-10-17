@@ -401,6 +401,38 @@
   button {
     font-size: 16px !important;
   }
+
+
+  /* Contenedor fijo en la esquina inferior izquierda */
+  .btn-container {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 1vh, 8px);
+    z-index: 9999;
+  }
+
+  /* Botones mini responsivos */
+  .mini-btn {
+    width: clamp(80px, 20vw, 120px);
+    font-size: clamp(10px, 2vw, 12px);
+    padding: clamp(4px, 0.8vh, 6px) clamp(6px, 1vw, 8px);
+    border-radius: 6px;
+    border: none;
+    background: #2c3e50;
+    color: white;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: all 0.2s ease;
+  }
+
+  .mini-btn:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background: #34495e;
+  }
 </style>
 
 
@@ -618,13 +650,11 @@
     <button id="btnAreaGrande">Área Grande</button>
     <button id="btnMostrarTodasNotas">Notas</button>
     <button id="btnTerritoriosTerminados" style="display:none">Territorios terminados</button>
-    <button id="backupBtn" style="position: fixed; left: 10px; bottom: 10px; padding: 10px; z-index: 9999;">
-      Copia de Seguridad
-    </button>
-    <input type="file" id="restoreFile" accept=".json" style="display:none;" />
-    <button id="restoreBtn" style="position: fixed; left: 10px; bottom: 70px; padding: 10px; z-index: 9999; ">
-      Restaurar Copia
-    </button>
+    <div class="btn-container">
+      <button id="restoreBtn" class="mini-btn">♻️ Restaurar</button>
+      <button id="backupBtn" class="mini-btn">💾 Copia</button>
+      <input type="file" id="restoreFile" accept=".json" style="display:none;" />
+    </div>
 
     <!-- Select personalizado -->
     <div class="custom-select" style="display:none;" id="customFiltroMes">
