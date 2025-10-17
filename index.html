@@ -24,8 +24,8 @@
 
 <style>
   /* ===========================
-   === Base / Reset =========
-   =========================== */
+     === Base / Reset =========
+     =========================== */
   html,
   body {
     margin: 0;
@@ -35,8 +35,8 @@
   }
 
   /* ===========================
-   === Mapa =================
-   =========================== */
+     === Mapa =================
+     =========================== */
   #map {
     height: 100vh;
     width: 100vw;
@@ -45,21 +45,21 @@
   }
 
   /* =====================================
-   === Menú izquierdo (selector) =======
-   ===================================== */
+     === Menú izquierdo (selector) =======
+     ===================================== */
   .menu {
     position: fixed;
     top: 1vh;
     left: 1vw;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
     padding: 0.5em;
     border-radius: 8px;
   }
 
   /* =====================================
-   === Menú derecho (Área Grande + Notas)
-   ===================================== */
+     === Menú derecho (Área Grande + Notas)
+     ===================================== */
   .menu-derecha {
     position: fixed;
     top: 1%;
@@ -68,33 +68,38 @@
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    /* separación entre botones para escritorio */
     margin: 0;
     padding: 0;
   }
 
-  /* === Estilos para los botones dentro de menu-derecha === */
   .menu-derecha button {
-    padding: 1vh 2vw;
-    font-size: 1.8vh;
+    padding: clamp(0.5vh, 1.2vw, 1.5vh) clamp(1vw, 2vw, 3vw);
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
     border-radius: 5px;
     cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 250px;
   }
 
   /* =================================================
-   === Selector de meses debajo del botón Notas ===
-   === (estética igual a selectorTerritorios) ======
-   ================================================= */
-  #filtroMes {
-    padding: 1.0vh 1vw;
-    font-size: 0.8vw;
+     === Selector de meses debajo del botón Notas ===
+     === (estética igual a selectorTerritorios) ======
+     ================================================= */
+  #filtroMes,
+  #selectorTerritorios,
+  #btnAreaGrande,
+  #btnMostrarTodasNotas,
+  #btnTerritoriosTerminados,
+  #backupBtn,
+  #restoreBtn {
     font-weight: bold;
     border: 2px solid #000;
-    outline: none;
     border-radius: 20px;
     background-color: #fff;
     color: #000;
     cursor: pointer;
+    outline: none;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -104,23 +109,50 @@
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-tap-highlight-color: transparent;
-    margin-top: 0.5vh;
-    /* pequeño espacio sobre el select */
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    padding: 1.0vh 1vw;
+    font-size: 0.8vw;
     background-repeat: no-repeat;
     background-position: right 1vw center;
     background-size: 16px;
+    box-sizing: border-box;
+  }
+
+  #filtroMes,
+  #selectorTerritorios {
+    margin-top: 0.5vh;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     padding-right: 2vw;
   }
 
-  #filtroMes:hover {
+  #btnAreaGrande,
+  #btnMostrarTodasNotas,
+  #btnTerritoriosTerminados,
+  #backupBtn,
+  #restoreBtn {
+    padding: 2vh 0.5vw;
+  }
+
+  /* Hover / Active */
+  #selectorTerritorios:hover,
+  #filtroMes:hover,
+  #btnAreaGrande:hover,
+  #btnMostrarTodasNotas:hover,
+  #btnTerritoriosTerminados:hover,
+  #backupBtn:hover,
+  #restoreBtn:hover {
     background-color: #ffffff;
     color: #1f1e1e;
     border-color: #444;
     transform: scale(1.03);
   }
 
-  #filtroMes:active {
+  #selectorTerritorios:active,
+  #filtroMes:active,
+  #btnAreaGrande:active,
+  #btnMostrarTodasNotas:active,
+  #btnTerritoriosTerminados:active,
+  #backupBtn:active,
+  #restoreBtn:active {
     transform: scale(0.97);
     background-color: #222;
     color: #fff;
@@ -128,22 +160,139 @@
   }
 
   /* ===========================
-   === Responsivo móvil ======
-   =========================== */
+     === SELECTS =========
+     =========================== */
+  .custom-select {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .custom-select .selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.5vh, 1vw, 1.2vh) clamp(1vw, 2vw, 2vw);
+    padding-right: clamp(2vw, 3vw, 2.5vw);
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    border: 2px solid #000;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #000;
+    user-select: none;
+    transition: all 0.25s ease-in-out;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .custom-select .selected:hover {
+    background-color: #ffffff;
+    color: #1f1e1e;
+    border-color: #444;
+    transform: scale(1.03);
+  }
+
+  .custom-select .selected:active {
+    transform: scale(0.97);
+    background-color: #222;
+    color: #fff;
+    border-color: #111;
+  }
+
+  .custom-select .options {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    z-index: 10000;
+    margin-top: 0.5vh;
+    padding: 0;
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: scaleY(0.8);
+    transform-origin: top;
+    pointer-events: none;
+  }
+
+  .custom-select.active .options {
+    opacity: 1;
+    transform: scaleY(1);
+    pointer-events: auto;
+  }
+
+  .custom-select.active .options {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    /* habilita clicks cuando está abierto */
+  }
+
+
+
+  .custom-select.active .options {
+    display: block;
+  }
+
+  .custom-select .options li {
+    padding: clamp(0.5vh, 1vw, 1.2vh) clamp(1vw, 2vw, 2vw);
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+  }
+
+  .custom-select .options li:hover {
+    background-color: #fafafa;
+    color: #111;
+    border-color: #444;
+    transform: scale(1.03);
+  }
+
+  .custom-select .options li:active {
+    transform: scale(0.97);
+    background-color: #222;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* Responsive móvil muy pequeño */
+  @media (max-width: 360px) {
+
+    .custom-select,
+    .custom-select .selected,
+    .custom-select .options li {
+      font-size: 0.95rem;
+      padding: 1vh 1vw;
+    }
+  }
+
+  /* ===========================
+     === Responsivo móvil ======
+     =========================== */
   @media (max-width: 480px) {
     .menu-derecha button {
       font-size: 3vw !important;
-      padding: 2vh 3vw !important;
-      min-width: 100px !important;
-    }
-
-    .menu-derecha button {
-      font-size: 3vw !important;
-      /* aumentar tamaño del texto en móvil */
       padding: 2vh 2vw !important;
-      /* más espacio dentro de los botones */
       min-width: 100px !important;
-      /* ancho mínimo para que no se achiquen */
     }
 
     #selectorTerritorios,
@@ -155,10 +304,9 @@
     }
   }
 
-
   /* ===========================
-   === Loader ===============
-   =========================== */
+     === Loader ===============
+     =========================== */
   #loader {
     position: absolute;
     top: 0;
@@ -195,64 +343,9 @@
     }
   }
 
-  /* =================================
-   === Botones generales / select ==
-   ================================= */
-  #selectorTerritorios,
-  #btnAreaGrande,
-  #btnMostrarTodasNotas,
-  #btnTerritoriosTerminados {
-    padding: 1.0vh 1vw;
-    font-size: 0.8vw;
-    font-weight: bold;
-    border: 2px solid #000;
-    outline: none;
-    border-radius: 20px;
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    transition: all 0.25s ease-in-out;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  #selectorTerritorios {
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 1vw center;
-    background-size: 16px;
-    padding-right: 2vw;
-  }
-
-  #selectorTerritorios:hover,
-  #btnAreaGrande:hover,
-  #btnMostrarTodasNotas:hover,
-  #btnTerritoriosTerminados:hover {
-    background-color: #ffffff;
-    color: #1f1e1e;
-    border-color: #444;
-    transform: scale(1.03);
-  }
-
-  #selectorTerritorios:active,
-  #btnAreaGrande:active,
-  #btnMostrarTodasNotas:active,
-  #btnTerritoriosTerminados:active {
-    transform: scale(0.97);
-    background-color: #222;
-    color: #fff;
-    border-color: #111;
-  }
-
   /* ===========================
-   === Otros estilos ========
-   =========================== */
+     === Otros estilos ========
+     =========================== */
   .leaflet-draw.leaflet-control {
     margin-top: 5vh !important;
   }
@@ -278,9 +371,6 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     font-size: 14px;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
   }
 
   .menu-contextual button {
@@ -316,6 +406,9 @@
 
 
 
+
+
+
 <script>
   // 🔧 Solución automática para Safari iPhone (reset de zoom)
   window.addEventListener("focusout", function () {
@@ -337,8 +430,101 @@
 
 
 <body>
+  <!-- HTML -->
   <div class="menu">
-    <select id="selectorTerritorios" onchange="cambiarTerritorio(); setTimeout(() => this.blur(), 200);">
+    <!-- Custom select -->
+    <div class="custom-select" id="customSelectorTerritorios">
+      <div class="selected">-- Selecciona un territorio --</div>
+      <ul class="options">
+        <li data-value="territorio1">Territorio 1</li>
+        <li data-value="territorio2">Territorio 2</li>
+        <li data-value="territorio3">Territorio 3</li>
+        <li data-value="territorio4">Territorio 4</li>
+        <li data-value="territorio5">Territorio 5</li>
+        <li data-value="territorio6">Territorio 6</li>
+        <li data-value="territorio7">Territorio 7</li>
+        <li data-value="territorio8">Territorio 8</li>
+        <li data-value="territorio9">Territorio 9</li>
+        <li data-value="territorio10">Territorio 10</li>
+        <li data-value="territorio11">Territorio 11</li>
+        <li data-value="territorio12">Territorio 12</li>
+        <li data-value="territorio13">Territorio 13</li>
+        <li data-value="territorio14">Territorio 14</li>
+        <li data-value="territorio15">Territorio 15</li>
+        <li data-value="territorio16">Territorio 16</li>
+        <li data-value="territorio17">Territorio 17</li>
+        <li data-value="territorio18">Territorio 18</li>
+        <li data-value="territorio19">Territorio 19</li>
+        <li data-value="territorio20">Territorio 20</li>
+        <li data-value="territorio21">Territorio 21</li>
+        <li data-value="territorio22">Territorio 22</li>
+        <li data-value="territorio23">Territorio 23</li>
+        <li data-value="territorio24">Territorio 24</li>
+        <li data-value="territorio25">Territorio 25</li>
+        <li data-value="territorio26">Territorio 26</li>
+        <li data-value="territorio27">Territorio 27</li>
+        <li data-value="territorio28">Territorio 28</li>
+        <li data-value="territorio29">Territorio 29</li>
+        <li data-value="territorio30">Territorio 30</li>
+        <li data-value="territorio31">Territorio 31</li>
+        <li data-value="territorio32">Territorio 32</li>
+        <li data-value="territorio33">Territorio 33</li>
+        <li data-value="territorio34">Territorio 34</li>
+        <li data-value="territorio35">Territorio 35</li>
+        <li data-value="territorio36">Territorio 36</li>
+        <li data-value="territorio37">Territorio 37</li>
+        <li data-value="territorio38">Territorio 38</li>
+        <li data-value="territorio39">Territorio 39</li>
+        <li data-value="territorio40">Territorio 40</li>
+        <li data-value="territorio41">Territorio 41</li>
+        <li data-value="territorio42">Territorio 42</li>
+        <li data-value="territorio43">Territorio 43</li>
+        <li data-value="territorio44">Territorio 44</li>
+        <li data-value="territorio45">Territorio 45</li>
+        <li data-value="territorio46">Territorio 46</li>
+        <li data-value="territorio47">Territorio 47</li>
+        <li data-value="territorio48">Territorio 48</li>
+        <li data-value="territorio49">Territorio 49</li>
+        <li data-value="territorio50">Territorio 50</li>
+        <li data-value="territorio51">Territorio 51</li>
+        <li data-value="territorio52">Territorio 52</li>
+        <li data-value="territorio53">Territorio 53</li>
+        <li data-value="territorio54">Territorio 54</li>
+        <li data-value="territorio55">Territorio 55</li>
+        <li data-value="territorio56">Territorio 56</li>
+        <li data-value="territorio57">Territorio 57</li>
+        <li data-value="territorio58">Territorio 58</li>
+        <li data-value="territorio59">Territorio 59</li>
+        <li data-value="territorio60">Territorio 60</li>
+        <li data-value="territorio61">Territorio 61</li>
+        <li data-value="territorio62">Territorio 62</li>
+        <li data-value="territorio63">Territorio 63</li>
+        <li data-value="territorio64">Territorio 64</li>
+        <li data-value="territorio65">Territorio 65</li>
+        <li data-value="territorio66">Territorio 66</li>
+        <li data-value="territorio67">Territorio 67</li>
+        <li data-value="territorio68">Territorio 68</li>
+        <li data-value="territorio69">Territorio 69</li>
+        <li data-value="territorio70">Territorio 70</li>
+        <li data-value="territorio71">Territorio 71</li>
+        <li data-value="territorio72">Territorio 72</li>
+        <li data-value="territorio73">Territorio 73</li>
+        <li data-value="territorio74">Territorio 74</li>
+        <li data-value="territorio75">Territorio 75</li>
+        <li data-value="territorio76">Territorio 76</li>
+        <li data-value="territorio77">Territorio 77</li>
+        <li data-value="territorio78">Territorio 78</li>
+        <li data-value="territorio79">Territorio 79</li>
+        <li data-value="territorio80">Territorio 80</li>
+        <li data-value="territorio81">Territorio 81</li>
+        <li data-value="territorio82">Territorio 82</li>
+        <li data-value="territorio83">Territorio 83</li>
+        <li data-value="territorio84">Territorio 84</li>
+      </ul>
+    </div>
+
+    <!-- Hidden original select -->
+    <select id="selectorTerritorios" style="display:none;">
       <option value="">-- Selecciona un territorio --</option>
       <option value="territorio1">Territorio 1</option>
       <option value="territorio2">Territorio 2</option>
@@ -424,18 +610,46 @@
       <option value="territorio82">Territorio 82</option>
       <option value="territorio83">Territorio 83</option>
       <option value="territorio84">Territorio 84</option>
-
-
     </select>
   </div>
 
+
   <div class="menu-derecha">
     <button id="btnAreaGrande">Área Grande</button>
-    <button id="btnMostrarTodasNotas" style=>Notas</button>
+    <button id="btnMostrarTodasNotas">Notas</button>
     <button id="btnTerritoriosTerminados" style="display:none">Territorios terminados</button>
-    <!--QUITE EL BOTON DE EXPORTAR EXCEL PARA INTEGRARLO AL POP UP-->
-    <select id="filtroMes" style="display:none" onchange="filtrarPorMes()">
-      <option value="inicio">Inicio</option>
+    <button id="backupBtn" style="position: fixed; left: 10px; bottom: 10px; padding: 10px; z-index: 9999;">
+      Copia de Seguridad
+    </button>
+    <input type="file" id="restoreFile" accept=".json" style="display:none;" />
+    <button id="restoreBtn" style="position: fixed; left: 10px; bottom: 70px; padding: 10px; z-index: 9999; ">
+      Restaurar Copia
+    </button>
+
+    <!-- Select personalizado -->
+    <div class="custom-select" style="display:none;" id="customFiltroMes">
+      <div class="selected">Mes</div>
+      <ul class="options">
+        <li data-value="inicio">Mes</li>
+        <li data-value="todos">Todos los meses</li>
+        <li data-value="01">Enero</li>
+        <li data-value="02">Febrero</li>
+        <li data-value="03">Marzo</li>
+        <li data-value="04">Abril</li>
+        <li data-value="05">Mayo</li>
+        <li data-value="06">Junio</li>
+        <li data-value="07">Julio</li>
+        <li data-value="08">Agosto</li>
+        <li data-value="09">Septiembre</li>
+        <li data-value="10">Octubre</li>
+        <li data-value="11">Noviembre</li>
+        <li data-value="12">Diciembre</li>
+      </ul>
+    </div>
+
+    <!-- Select original oculto -->
+    <select id="filtroMes" style="display:none;">
+      <option value="inicio">Mes</option>
       <option value="todos">Todos los meses</option>
       <option value="01">Enero</option>
       <option value="02">Febrero</option>
@@ -450,6 +664,9 @@
       <option value="11">Noviembre</option>
       <option value="12">Diciembre</option>
     </select>
+
+
+
   </div>
   <!-- CUADRO DE PORCENTAJE -->
   <div id="cuadroPorcentaje" style="
@@ -508,6 +725,9 @@
   <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
   <script src="https://unpkg.com/@turf/turf/turf.min.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+
+
 
 
 
@@ -884,10 +1104,6 @@
     // ====================================================REGISTRAR CAPITAN Y FILTRAR POR MES=================================================//
 
 
-
-    /*
-    
-
     // ================================
     // === BLOQUE 1: Registrar Capitán ===
     // ================================
@@ -1146,7 +1362,7 @@
 
 
 
-*/
+
 
 
 
@@ -1343,7 +1559,11 @@
     // ==========================================================================================================================
     // === BLOQUE: Botón Área Grande ===
     // ==========================================================================================================================
-    document.getElementById("btnAreaGrande").addEventListener("click", function () {
+    const btnArea = document.getElementById("btnAreaGrande");
+    let presionadoTimeout;
+
+    // === Click izquierdo normal ===
+    btnArea.addEventListener("click", function () {
       // ================================
       // Cerrar cualquier popup abierto
       // ================================
@@ -1381,8 +1601,74 @@
       // Volar a vista general de todo el mapa
       // ================================
       flyWithLoader(boundsIniciales);
+
+      // ================================
+      // Reiniciar custom select de territorios
+      // ================================
+      const customSelectTerr = document.getElementById("customSelectorTerritorios");
+      const selectedTerr = customSelectTerr.querySelector(".selected");
+      const selectorTerritorios = document.getElementById("selectorTerritorios");
+
+      selectorTerritorios.value = "";                   // select oculto
+      selectedTerr.textContent = "-- Selecciona un territorio --"; // custom select visible
+      customSelectTerr.classList.remove("active");     // cerrar lista si estaba abierta
+
+    });
+
+    // === Click derecho (menú contextual) ===
+    btnArea.addEventListener("contextmenu", function (e) {
+      e.preventDefault(); // Evita que salga el menú del navegador
+      const filtroMes = document.getElementById("filtroMes");
+      const customSelect = document.getElementById("customFiltroMes");
+      const selected = customSelect.querySelector(".selected");
+
+      filtroMes.value = "inicio";   // select oculto
+      selected.textContent = "Mes"; // custom select visible
+      filtrarPorMes(); // Ejecuta la función de filtrado
+      console.log("Clic derecho → Filtro establecido en 'Mes'");
+    });
+
+    // === Mantener presionado (funciona en PC y móvil) ===
+    btnArea.addEventListener("mousedown", function () {
+      presionadoTimeout = setTimeout(() => {
+        const filtroMes = document.getElementById("filtroMes");
+        const customSelect = document.getElementById("customFiltroMes");
+        const selected = customSelect.querySelector(".selected");
+
+        filtroMes.value = "inicio";
+        selected.textContent = "Mes";
+        filtrarPorMes();
+        console.log("Pulsación larga → Filtro establecido en 'Mes'");
+      }, 800); // 800 ms = ~0.8 s de mantener presionado
+    });
+
+    btnArea.addEventListener("mouseup", function () {
+      clearTimeout(presionadoTimeout);
+    });
+
+    btnArea.addEventListener("mouseleave", function () {
+      clearTimeout(presionadoTimeout);
+    });
+
+    btnArea.addEventListener("touchstart", function () {
+      presionadoTimeout = setTimeout(() => {
+        const filtroMes = document.getElementById("filtroMes");
+        const customSelect = document.getElementById("customFiltroMes");
+        const selected = customSelect.querySelector(".selected");
+
+        filtroMes.value = "inicio";
+        selected.textContent = "Mes";
+        filtrarPorMes();
+        console.log("Pulsación larga (móvil) → Filtro establecido en 'Mes'");
+      }, 800);
+    });
+
+    btnArea.addEventListener("touchend", function () {
+      clearTimeout(presionadoTimeout);
     });
     // ================================================================================================================================//
+
+
 
 
 
@@ -1433,12 +1719,33 @@
 
     // Obtener el selector de mes
     const filtroMes = document.getElementById("filtroMes");
+
     if (filtroMes) {
-      // Ejecutar filtrado inmediatamente al cambiar valor (útil en móviles)
+      // Eventos normales
       filtroMes.addEventListener("input", filtrarPorMes);
-      // Ejecutar filtrado al confirmar selección (compatibilidad con PC)
       filtroMes.addEventListener("change", filtrarPorMes);
+
+      // === CLICK DERECHO (PC) ===
+      filtroMes.addEventListener("contextmenu", function (e) {
+        e.preventDefault(); // Evita que aparezca el menú del navegador
+        filtroMes.value = "inicio"; // Selecciona la opción "Mes"
+        filtrarPorMes();
+      });
+
+      // === DEJAR PRESIONADO (MÓVIL) ===
+      let pressTimer;
+      filtroMes.addEventListener("touchstart", function (e) {
+        pressTimer = setTimeout(() => {
+          filtroMes.value = "inicio"; // Selecciona la opción "Mes"
+          filtrarPorMes();
+        }, 800); // 800 ms = dejar presionado
+      });
+
+      filtroMes.addEventListener("touchend", function (e) {
+        clearTimeout(pressTimer); // Cancela si no se mantiene presionado
+      });
     }
+
     // ================================================================================================================================//
 
 
@@ -1538,11 +1845,181 @@
 
 
 
+  </script>
 
 
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const backupBtn = document.getElementById('backupBtn');
+      const restoreBtn = document.getElementById('restoreBtn');
+      const restoreFile = document.getElementById('restoreFile');
 
+      // ====================
+      // COPIA DE SEGURIDAD
+      // ====================
+      backupBtn.addEventListener('click', () => {
+        // Popup para pedir nombre y fecha
+        const popup = document.createElement('div');
+        popup.style.position = 'fixed';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.backgroundColor = '#fff';
+        popup.style.padding = '20px';
+        popup.style.borderRadius = '10px';
+        popup.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+        popup.style.zIndex = 9999;
+        popup.innerHTML = `
+      <p>Registrar copia de seguridad</p>
+      <label>Nombre: <input type="text" id="backupName" placeholder="Nombre de copia de seguridad"></label><br><br>
+      <label>Fecha: <input type="date" id="backupDate"></label><br><br>
+      <button id="confirmBackup" style="padding:10px 15px; background:#28a745; color:#fff; border:none; border-radius:5px; cursor:pointer;">Guardar</button>
+      <button id="cancelBackup" style="padding:10px 15px; background:#ccc; color:#000; border:none; border-radius:5px; cursor:pointer;">Cancelar</button>
+    `;
+        document.body.appendChild(popup);
+
+        // Cancelar
+        document.getElementById('cancelBackup').addEventListener('click', () => {
+          document.body.removeChild(popup);
+        });
+
+        // Confirmar
+        document.getElementById('confirmBackup').addEventListener('click', () => {
+          const nombre = document.getElementById('backupName').value.trim() || 'Copia';
+          const fechaInput = document.getElementById('backupDate').value;
+          let fecha = new Date();
+          if (fechaInput) {
+            fecha = new Date(fechaInput);
+          }
+
+          const nombreArchivo = `${nombre} ${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}.json`;
+
+          // Convertir localStorage a JSON y descargar
+          const data = JSON.stringify(localStorage, null, 2);
+          const blob = new Blob([data], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = nombreArchivo;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+
+          document.body.removeChild(popup);
+
+          // Popup bonito post-descarga
+          const popup2 = document.createElement('div');
+          popup2.style.position = 'fixed';
+          popup2.style.top = '50%';
+          popup2.style.left = '50%';
+          popup2.style.transform = 'translate(-50%, -50%)';
+          popup2.style.backgroundColor = '#fff';
+          popup2.style.padding = '20px';
+          popup2.style.borderRadius = '10px';
+          popup2.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+          popup2.style.zIndex = 9999;
+          popup2.innerHTML = `
+        <p>Copia de seguridad "${nombreArchivo}" descargada ✅</p>
+        <button id="cerrarPopup2" style="padding:10px 15px; background:#ccc; color:#000; border:none; border-radius:5px; cursor:pointer;">
+          Cerrar
+        </button>
+      `;
+          document.body.appendChild(popup2);
+
+          document.getElementById('cerrarPopup2').addEventListener('click', () => {
+            document.body.removeChild(popup2);
+          });
+        });
+      });
+
+      // ====================
+      // RESTAURAR COPIA
+      // ====================
+      restoreBtn.addEventListener('click', () => {
+        restoreFile.click();
+      });
+
+      restoreFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          try {
+            const data = JSON.parse(event.target.result);
+            localStorage.clear();
+            for (const key in data) {
+              localStorage.setItem(key, data[key]);
+            }
+            alert('Copia de seguridad restaurada ✅');
+            location.reload();
+          } catch (err) {
+            alert('Error al restaurar el archivo. Asegúrate de que sea la copia correcta.');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+    });
+
+
+
+    // ====================
+    // FUNCION GENERAL PARA LOS SELECTS PERSONALIZADOS
+    // ====================
+
+    function initCustomSelect(customId, originalId, callback) {
+      const customSelect = document.getElementById(customId);
+      const selected = customSelect.querySelector(".selected");
+      const options = customSelect.querySelectorAll(".options li");
+      const originalSelect = document.getElementById(originalId);
+
+      // Abrir/cerrar el select al hacer click
+      selected.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeAllCustomSelects(customSelect); // Cierra los demás antes de abrir
+        customSelect.classList.toggle("active");
+      });
+
+      // Selección de opción
+      options.forEach(opt => {
+        opt.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const value = opt.dataset.value;
+          selected.textContent = opt.textContent;
+          originalSelect.value = value;
+          customSelect.classList.remove("active");
+          callback(value); // Llama la función asociada (filtrarPorMes o cambiarTerritorio)
+        });
+      });
+
+      // Evitar rebote de scroll en móviles
+      const optionsContainer = customSelect.querySelector(".options");
+      optionsContainer.addEventListener("touchmove", (e) => {
+        e.stopPropagation();
+      }, { passive: false });
+    }
+
+    // Cerrar todos los selects al hacer click fuera
+    function closeAllCustomSelects(exception = null) {
+      document.querySelectorAll(".custom-select").forEach(sel => {
+        if (sel !== exception) sel.classList.remove("active");
+      });
+    }
+
+    document.addEventListener("click", () => closeAllCustomSelects());
+    document.addEventListener("touchstart", () => closeAllCustomSelects());
+
+    // ====================
+    // INICIALIZACIÓN
+    // ====================
+
+    initCustomSelect("customFiltroMes", "filtroMes", filtrarPorMes);
+    initCustomSelect("customSelectorTerritorios", "selectorTerritorios", cambiarTerritorio);
 
 
 
@@ -1550,6 +2027,10 @@
 
 
   </script>
+
+
+
+
 
 
 
