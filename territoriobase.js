@@ -240,7 +240,7 @@ function eliminarCapitan(polId, territorioId) {
 
 
 
-*/
+
 
 
 
@@ -277,7 +277,7 @@ function registrarEventosTerritorioActivo(territorio, notasPoligonos, territorio
     });
   });
 }
-
+*/
 
 
 
