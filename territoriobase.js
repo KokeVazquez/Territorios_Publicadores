@@ -155,7 +155,6 @@ function eliminarNota(id, index, territorioId) {
 
 
 
-/*
 
 
 
@@ -277,7 +276,7 @@ function registrarEventosTerritorioActivo(territorio, notasPoligonos, territorio
     });
   });
 }
-*/
+
 
 
 
