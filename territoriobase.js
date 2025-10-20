@@ -64,7 +64,6 @@ function mostrarMenu(e, pol, notasPoligonos, territorioId) {
   ocultarMenu();
   var menu = document.getElementById("menuContextual");
   if (!menu) return;
-  menu.style.pointerEvents = "none";
 
   var x = e.originalEvent.clientX || (e.originalEvent.touches && e.originalEvent.touches[0].clientX);
   var y = e.originalEvent.clientY || (e.originalEvent.touches && e.originalEvent.touches[0].clientY);
