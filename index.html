@@ -646,6 +646,30 @@
   </div>
 
 
+  <button id="btnUbicacion" style="
+  position: fixed;
+  bottom: clamp(80px, 5vh, 80px); /* justo encima del cuadro de porcentaje */
+  right: clamp(8px, 1vw, 12px); /* pegado al borde derecho */
+  z-index: 10001;
+  background: white;
+  color: white;
+  border: none;
+  padding: clamp(5px, 1vh, 8px) clamp(6px, 1.5vw, 12px);
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: clamp(16px, 2.5vw, 20px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+">
+    📍
+  </button>
+
+
+
   <div class="menu-derecha">
     <button id="btnAreaGrande">Área Grande</button>
     <button id="btnMostrarTodasNotas">Notas</button>
@@ -2252,6 +2276,69 @@
 
     initCustomSelect("customFiltroMes", "filtroMes", filtrarPorMes);
     initCustomSelect("customSelectorTerritorios", "selectorTerritorios", cambiarTerritorio);
+
+
+
+    // ===============================
+    // === MOSTRAR UBICACIÓN MANUALMENTE + ACTIVAR ÁREA GRANDE ===
+    // ===============================
+
+    let marcadorUbicacion = null;
+    let seguimientoActivo = false;
+    let watchId = null;
+
+    function activarUbicacion() {
+      const btnUbicacion = document.getElementById("btnUbicacion");
+      const btnAreaGrande = document.getElementById("btnAreaGrande"); // tu botón de área grande
+
+      if (!navigator.geolocation) {
+        alert("Tu navegador no soporta geolocalización. Bienvenido al pasado.");
+        return;
+      }
+
+      if (seguimientoActivo) {
+        // Si ya está activo, desactiva ubicación
+        navigator.geolocation.clearWatch(watchId);
+        seguimientoActivo = false;
+        btnUbicacion.innerText = "📍";
+        if (marcadorUbicacion) {
+          map.removeLayer(marcadorUbicacion);
+          marcadorUbicacion = null;
+        }
+
+        // Activar automáticamente el botón de área grande
+        if (btnAreaGrande) btnAreaGrande.click();
+
+        return;
+      }
+
+      // Activar seguimiento de ubicación
+      seguimientoActivo = true;
+      btnUbicacion.innerText = "❌";
+
+      watchId = navigator.geolocation.watchPosition(
+        function (pos) {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+
+          if (marcadorUbicacion) {
+            marcadorUbicacion.setLatLng([lat, lon]);
+          } else {
+            marcadorUbicacion = L.marker([lat, lon]).addTo(map).openPopup();
+          }
+
+          map.setView([lat, lon], 17);
+        },
+        function (err) {
+          alert("Error al obtener ubicación: " + err.message);
+          seguimientoActivo = false;
+        },
+        { enableHighAccuracy: true }
+      );
+    }
+
+    // Conectar el botón con la función
+    document.getElementById("btnUbicacion").addEventListener("click", activarUbicacion);
 
 
 
