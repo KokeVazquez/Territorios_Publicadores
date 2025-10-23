@@ -90,9 +90,7 @@
   #selectorTerritorios,
   #btnAreaGrande,
   #btnMostrarTodasNotas,
-  #btnTerritoriosTerminados,
-  #backupBtn,
-  #restoreBtn {
+  #btnTerritoriosTerminados {
     font-weight: bold;
     border: 2px solid #000;
     border-radius: 20px;
@@ -126,9 +124,7 @@
 
   #btnAreaGrande,
   #btnMostrarTodasNotas,
-  #btnTerritoriosTerminados,
-  #backupBtn,
-  #restoreBtn {
+  #btnTerritoriosTerminados {
     padding: 2vh 0.5vw;
   }
 
@@ -137,9 +133,7 @@
   #filtroMes:hover,
   #btnAreaGrande:hover,
   #btnMostrarTodasNotas:hover,
-  #btnTerritoriosTerminados:hover,
-  #backupBtn:hover,
-  #restoreBtn:hover {
+  #btnTerritoriosTerminados:hover {
     background-color: #ffffff;
     color: #1f1e1e;
     border-color: #444;
@@ -150,9 +144,7 @@
   #filtroMes:active,
   #btnAreaGrande:active,
   #btnMostrarTodasNotas:active,
-  #btnTerritoriosTerminados:active,
-  #backupBtn:active,
-  #restoreBtn:active {
+  #btnTerritoriosTerminados:active {
     transform: scale(0.97);
     background-color: #222;
     color: #fff;
@@ -436,6 +428,66 @@
 
 
 
+  .hamburger-menu {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+  }
+
+  .hamburger-icon {
+    font-size: 24px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .hamburger-icon:hover {
+    background: #555;
+  }
+
+  .menu-panel {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: rgba(40, 40, 40, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform: translateX(-150%);
+    transition: transform 0.3s ease;
+  }
+
+  .menu-panel button {
+    background: #444;
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .menu-panel button:hover {
+    background: #666;
+  }
+
+  .menu-panel.show {
+    transform: translateX(0);
+  }
+
+
+
+
 
   /* ==============================================================================================================================
     // === PARA QUE NO SE SELECCIONE TEXTO EN SAFARI ===
@@ -479,6 +531,9 @@
     }
   });
 </script>
+
+
+
 
 
 
@@ -670,27 +725,6 @@
   </div>
 
 
-  <button id="btnUbicacion" style="
-  position: fixed;
-  bottom: clamp(80px, 5vh, 80px); /* justo encima del cuadro de porcentaje */
-  right: clamp(8px, 1vw, 12px); /* pegado al borde derecho */
-  z-index: 10001;
-  background: white;
-  color: white;
-  border: none;
-  padding: clamp(5px, 1vh, 8px) clamp(6px, 1.5vw, 12px);
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: clamp(16px, 2.5vw, 20px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  min-width: 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-">
-    📍
-  </button>
 
 
 
@@ -698,10 +732,17 @@
     <button id="btnAreaGrande">Área Grande</button>
     <button id="btnMostrarTodasNotas">Notas</button>
     <button id="btnTerritoriosTerminados" style="display:none">Territorios terminados</button>
-    <div class="btn-container">
-      <button id="restoreBtn" class="mini-btn">♻️ Restaurar</button>
-      <button id="backupBtn" class="mini-btn">💾 Copia</button>
-      <input type="file" id="restoreFile" accept=".json" style="display:none;" />
+
+
+
+    <!-- Menú hamburguesa -->
+    <div class="hamburger-menu">
+      <button id="hamburger-btn" class="hamburger-icon">☰</button>
+      <div id="menu-panel" class="menu-panel">
+        <button id="btnCopiaSeguridad">Copia de seguridad</button>
+        <button id="btnRestaurar">Restaurar copia</button>
+        <button id="btnUbicacion">Ubicación</button>
+      </div>
     </div>
 
     <!-- Select personalizado -->
@@ -2135,15 +2176,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const backupBtn = document.getElementById('backupBtn');
-      const restoreBtn = document.getElementById('restoreBtn');
-      const restoreFile = document.getElementById('restoreFile');
 
       // ====================
       // COPIA DE SEGURIDAD
       // ====================
-      backupBtn.addEventListener('click', () => {
-        // Popup para pedir nombre y fecha
+      function hacerCopiaSeguridad() {
         const popup = document.createElement('div');
         popup.style.position = 'fixed';
         popup.style.top = '50%';
@@ -2163,23 +2200,17 @@
     `;
         document.body.appendChild(popup);
 
-        // Cancelar
         document.getElementById('cancelBackup').addEventListener('click', () => {
           document.body.removeChild(popup);
         });
 
-        // Confirmar
         document.getElementById('confirmBackup').addEventListener('click', () => {
           const nombre = document.getElementById('backupName').value.trim() || 'Copia';
           const fechaInput = document.getElementById('backupDate').value;
           let fecha = new Date();
-          if (fechaInput) {
-            fecha = new Date(fechaInput);
-          }
+          if (fechaInput) fecha = new Date(fechaInput);
 
           const nombreArchivo = `${nombre} ${fecha.getDate()}-${fecha.getMonth() + 1}-${fecha.getFullYear()}.json`;
-
-          // Convertir localStorage a JSON y descargar
           const data = JSON.stringify(localStorage, null, 2);
           const blob = new Blob([data], { type: 'application/json' });
           const url = URL.createObjectURL(blob);
@@ -2191,10 +2222,9 @@
           a.click();
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
-
           document.body.removeChild(popup);
 
-          // Popup bonito post-descarga
+          // Popup post-descarga
           const popup2 = document.createElement('div');
           popup2.style.position = 'fixed';
           popup2.style.top = '50%';
@@ -2207,47 +2237,175 @@
           popup2.style.zIndex = 9999;
           popup2.innerHTML = `
         <p>Copia de seguridad "${nombreArchivo}" descargada ✅</p>
-        <button id="cerrarPopup2" style="padding:10px 15px; background:#ccc; color:#000; border:none; border-radius:5px; cursor:pointer;">
-          Cerrar
-        </button>
+        <button id="cerrarPopup2" style="padding:10px 15px; background:#ccc; color:#000; border:none; border-radius:5px; cursor:pointer;">Cerrar</button>
       `;
           document.body.appendChild(popup2);
-
-          document.getElementById('cerrarPopup2').addEventListener('click', () => {
-            document.body.removeChild(popup2);
-          });
+          document.getElementById('cerrarPopup2').addEventListener('click', () => document.body.removeChild(popup2));
         });
-      });
+      }
 
       // ====================
       // RESTAURAR COPIA
       // ====================
-      restoreBtn.addEventListener('click', () => {
-        restoreFile.click();
-      });
+      function restaurarCopia() {
+        const restoreFile = document.createElement('input');
+        restoreFile.type = 'file';
+        restoreFile.accept = '.json';
+        restoreFile.style.display = 'none';
+        document.body.appendChild(restoreFile);
 
-      restoreFile.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+        restoreFile.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          try {
-            const data = JSON.parse(event.target.result);
-            localStorage.clear();
-            for (const key in data) {
-              localStorage.setItem(key, data[key]);
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            try {
+              const data = JSON.parse(event.target.result);
+              localStorage.clear();
+              for (const key in data) localStorage.setItem(key, data[key]);
+              alert('Copia de seguridad restaurada ✅');
+              location.reload();
+            } catch (err) {
+              alert('Error al restaurar el archivo. Asegúrate de que sea la copia correcta.');
             }
-            alert('Copia de seguridad restaurada ✅');
-            location.reload();
-          } catch (err) {
-            alert('Error al restaurar el archivo. Asegúrate de que sea la copia correcta.');
+          };
+          reader.readAsText(file);
+        });
+
+        restoreFile.click();
+        document.body.removeChild(restoreFile);
+      }
+
+      // ====================
+      // BOTÓN UBICACIÓN
+      // ====================
+      let marcadorUbicacion = null;
+      let seguimientoActivo = false;
+      let watchId = null;
+
+      function activarUbicacion() {
+        const btnAreaGrande = document.getElementById("btnAreaGrande");
+        const menuPanel = document.getElementById('menu-panel');
+
+        if (!navigator.geolocation) {
+          alert("Tu navegador no soporta geolocalización. Bienvenido al pasado.");
+          return;
+        }
+
+        // Si ya está activo, detenerlo
+        if (seguimientoActivo) {
+          navigator.geolocation.clearWatch(watchId);
+          seguimientoActivo = false;
+          if (marcadorUbicacion) {
+            map.removeLayer(marcadorUbicacion);
+            marcadorUbicacion = null;
           }
-        };
-        reader.readAsText(file);
+          if (btnAreaGrande) btnAreaGrande.click();
+
+          // Cerrar menú hamburguesa
+          if (menuPanel.classList.contains('show')) {
+            menuPanel.classList.remove('show');
+          }
+          return;
+        }
+
+        // Loader mientras obtiene ubicación
+        const loader = document.createElement('div');
+        loader.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    ">
+      <div style="
+        width: 60px; height: 60px;
+        border: 6px solid #fff;
+        border-top: 6px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      "></div>
+    </div>
+    <style>
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  `;
+        document.body.appendChild(loader);
+
+        seguimientoActivo = true;
+
+        watchId = navigator.geolocation.watchPosition(
+          function (pos) {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            if (marcadorUbicacion) marcadorUbicacion.setLatLng([lat, lon]);
+            else marcadorUbicacion = L.marker([lat, lon]).addTo(map).openPopup();
+            map.setView([lat, lon], 17);
+            document.body.removeChild(loader);
+          },
+          function (err) {
+            alert("Error al obtener ubicación: " + err.message);
+            seguimientoActivo = false;
+            document.body.removeChild(loader);
+          },
+          { enableHighAccuracy: true }
+        );
+      }
+
+      // ====================
+      // MENU HAMBURGUESA
+      // ====================
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const menuPanel = document.getElementById('menu-panel');
+      const backupBtnMenu = document.getElementById('btnCopiaSeguridad');
+      const restoreBtnMenu = document.getElementById('btnRestaurar');
+      const btnUbicacionMenu = document.getElementById('btnUbicacion');
+
+      // Toggle del menú
+      hamburgerBtn.addEventListener('click', () => {
+        menuPanel.classList.toggle('show');
       });
 
+      // Función para cerrar el menú si está abierto
+      function cerrarMenu() {
+        if (menuPanel.classList.contains('show')) {
+          menuPanel.classList.remove('show');
+        }
+      }
+
+      // Conectar botones a funciones y cerrar menú
+      backupBtnMenu.addEventListener('click', () => {
+        cerrarMenu();
+        hacerCopiaSeguridad();
+      });
+
+      restoreBtnMenu.addEventListener('click', () => {
+        cerrarMenu();
+        restaurarCopia();
+      });
+
+      btnUbicacionMenu.addEventListener('click', () => {
+        cerrarMenu();
+        activarUbicacion();
+      });
     });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
