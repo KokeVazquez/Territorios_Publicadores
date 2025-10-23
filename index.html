@@ -122,48 +122,117 @@
     padding-right: 2vw;
   }
 
+  /* ====================================================================================================================================
+   === Botones estilo "Liquid Glass" realista iOS con letra tipo iPhone ===
+   =================================================== */
+  button,
   #btnAreaGrande,
   #btnMostrarTodasNotas,
-  #btnTerritoriosTerminados {
-    padding: 2vh 0.5vw;
+  #btnTerritoriosTerminados,
+  #registrarTerritorioBtn,
+  #backupBtn,
+  #restoreBtn {
+    position: relative;
+    background: rgba(24, 23, 23, 0.068);
+    border: 2px solid rgba(253, 253, 253, 0.199);
+    backdrop-filter: blur(5px) saturate(20%);
+    -webkit-backdrop-filter: blur(2px) saturate(20%);
+    border-radius: 50px;
+    color: white;
+    /* ======================================
+     Letra tipo iPhone moderna
+     ====================================== */
+    font-family: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    /* más delgada y elegante */
+    font-size: 1rem;
+    /* ajusta si quieres más grande o más pequeña */
+    -webkit-font-smoothing: antialiased;
+    /* suaviza bordes de fuente */
+    -moz-osx-font-smoothing: grayscale;
+    box-shadow:
+      inset 0 0px 0px rgba(255, 255, 255, 0.6),
+      0 4px 10px rgba(0, 0, 0, 0.25),
+      0 0 25px rgba(255, 255, 255, 0.03);
+    transition: all 0.25s ease;
+    overflow: hidden;
+    outline: none;
+    /* quita el contorno azul al hacer click */
+    -webkit-tap-highlight-color: transparent;
+    /* quita el highlight en móviles iOS/Android */
   }
 
-  /* Hover / Active */
-  #selectorTerritorios:hover,
-  #filtroMes:hover,
+  /* Brillo superior (reflejo) */
+  button::after,
+  #btnAreaGrande::after,
+  #btnMostrarTodasNotas::after,
+  #btnTerritoriosTerminados::after,
+  #registrarTerritorioBtn::after,
+  #backupBtn::after,
+  #restoreBtn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.35),
+        rgba(255, 255, 255, 0.05));
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Hover: más luz, efecto gel */
+  button:hover,
   #btnAreaGrande:hover,
   #btnMostrarTodasNotas:hover,
-  #btnTerritoriosTerminados:hover {
-    background-color: #ffffff;
-    color: #1f1e1e;
-    border-color: #444;
-    transform: scale(1.03);
+  #btnTerritoriosTerminados:hover,
+  #registrarTerritorioBtn:hover,
+  #backupBtn:hover,
+  #restoreBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 0.8),
+      0 6px 20px rgba(0, 0, 0, 0.35),
+      0 0 30px rgba(255, 255, 255, 0.2);
   }
 
-  #selectorTerritorios:active,
-  #filtroMes:active,
+  /* Click: rebote suave */
+  button:active,
   #btnAreaGrande:active,
   #btnMostrarTodasNotas:active,
-  #btnTerritoriosTerminados:active {
-    transform: scale(0.97);
-    background-color: #222;
-    color: #fff;
-    border-color: #111;
+  #btnTerritoriosTerminados:active,
+  #registrarTerritorioBtn:active,
+  #backupBtn:active,
+  #restoreBtn:active {
+    transform: scale(0.96);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow:
+      inset 0 2px 3px rgba(255, 255, 255, 0.9),
+      0 3px 8px rgba(0, 0, 0, 0.4);
   }
 
-  /* ===========================
-     === SELECTS =========
-     =========================== */
+  /* =======================================================================================================================================
+
+
+
+   /* ===========================
+   === SELECTS Liquid Glass ===
+   =========================== */
   .custom-select {
     position: relative;
     cursor: pointer;
     width: 100%;
     max-width: 250px;
     box-sizing: border-box;
-    font-weight: bold;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
   }
 
+  /* Caja del selector */
   .custom-select .selected {
     display: flex;
     align-items: center;
@@ -171,41 +240,47 @@
     padding: clamp(0.5vh, 1vw, 1.2vh) clamp(1vw, 2vw, 2vw);
     padding-right: clamp(2vw, 3vw, 2.5vw);
     font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-    border: 2px solid #000;
     border-radius: 20px;
-    background-color: #fff;
-    color: #000;
+    background: rgba(70, 128, 182, 0.37);
+    backdrop-filter: blur(5px) saturate(150%);
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.137);
+    color: #fff;
     user-select: none;
     transition: all 0.25s ease-in-out;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
     background-repeat: no-repeat;
     background-position: right 1vw center;
     background-size: 16px;
-    box-sizing: border-box;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.25), 0 0 25px rgba(255, 255, 255, 0.05);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  /* Hover estilo gel */
   .custom-select .selected:hover {
-    background-color: #ffffff;
-    color: #1f1e1e;
-    border-color: #444;
+    background: rgba(255, 255, 255, 0.25);
     transform: scale(1.03);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 6px 20px rgba(0, 0, 0, 0.35);
   }
 
+  /* Click: efecto burbuja */
   .custom-select .selected:active {
     transform: scale(0.97);
-    background-color: #222;
-    color: #fff;
-    border-color: #111;
+    background: rgba(255, 255, 255, 0.3);
   }
 
+  /* Lista de opciones */
   .custom-select .options {
     list-style: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #fff;
-    border: 2px solid #000;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px) saturate(150%);
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     max-height: 60vh;
     overflow-y: auto;
@@ -215,7 +290,6 @@
     margin-top: 0.5vh;
     padding: 0;
     box-sizing: border-box;
-
     transition: all 0.2s ease;
     opacity: 0;
     transform: scaleY(0.8);
@@ -223,25 +297,15 @@
     pointer-events: none;
   }
 
+  /* Abrir opciones */
   .custom-select.active .options {
     opacity: 1;
     transform: scaleY(1);
     pointer-events: auto;
-  }
-
-  .custom-select.active .options {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    /* habilita clicks cuando está abierto */
-  }
-
-
-
-  .custom-select.active .options {
     display: block;
   }
 
+  /* Cada opción */
   .custom-select .options li {
     padding: clamp(0.5vh, 1vw, 1.2vh) clamp(1vw, 2vw, 2vw);
     font-size: clamp(0.8rem, 1.5vw, 1.2rem);
@@ -250,23 +314,25 @@
     text-align: center;
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
+    color: #fff;
   }
 
+  /* Hover opción */
   .custom-select .options li:hover {
-    background-color: #fafafa;
-    color: #111;
-    border-color: #444;
+    background: rgba(255, 255, 255, 0.25);
+    color: #000;
     transform: scale(1.03);
+    border-radius: 15px;
   }
 
+  /* Click opción */
   .custom-select .options li:active {
     transform: scale(0.97);
-    background-color: #222;
+    background: rgba(255, 255, 255, 0.3);
     color: #fff;
-    border-color: #111;
   }
 
-  /* Responsive móvil muy pequeño */
+  /* Responsive muy pequeño */
   @media (max-width: 360px) {
 
     .custom-select,
@@ -276,6 +342,7 @@
       padding: 1vh 1vw;
     }
   }
+
 
   /* ===========================
      === Responsivo móvil ======
@@ -357,21 +424,32 @@
   }
 
   .menu-contextual {
-    background: white;
+    background: rgba(0, 0, 0, 0.062);
+    /* efecto vidrio */
+    backdrop-filter: blur(5px) saturate(150%);
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    color: black;
+    /* letras visibles */
     padding: 8px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     font-size: 14px;
     user-select: none;
   }
 
   .menu-contextual button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
     padding: 6px 12px;
     font-size: 14px;
     cursor: pointer;
     display: block;
     margin: 5px 0;
     width: 100%;
+    color: black;
+    /* letras visibles */
+    transition: all 0.25s ease;
   }
 
   .etiquetaTerritorio {
