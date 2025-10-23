@@ -2446,11 +2446,12 @@
       const btnUbicacionMenu = document.getElementById('btnUbicacion');
 
       // Toggle del menú
-      hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.addEventListener('click', (e) => {
         menuPanel.classList.toggle('show');
+        e.stopPropagation(); // evita que el click se propague y cierre el menú inmediatamente
       });
 
-      // Función para cerrar el menú si está abierto
+      // Función para cerrar el menú
       function cerrarMenu() {
         if (menuPanel.classList.contains('show')) {
           menuPanel.classList.remove('show');
@@ -2458,19 +2459,30 @@
       }
 
       // Conectar botones a funciones y cerrar menú
-      backupBtnMenu.addEventListener('click', () => {
+      backupBtnMenu.addEventListener('click', (e) => {
         cerrarMenu();
         hacerCopiaSeguridad();
+        e.stopPropagation();
       });
 
-      restoreBtnMenu.addEventListener('click', () => {
+      restoreBtnMenu.addEventListener('click', (e) => {
         cerrarMenu();
         restaurarCopia();
+        e.stopPropagation();
       });
 
-      btnUbicacionMenu.addEventListener('click', () => {
+      btnUbicacionMenu.addEventListener('click', (e) => {
         cerrarMenu();
         activarUbicacion();
+        e.stopPropagation();
+      });
+
+      // Cerrar menú si se hace click en cualquier otra parte de la página
+      document.addEventListener('click', (e) => {
+        // Solo cerrar si el click no fue dentro del menú ni en el botón hamburguesa
+        if (!menuPanel.contains(e.target) && e.target !== hamburgerBtn) {
+          cerrarMenu();
+        }
       });
     });
 

@@ -185,13 +185,6 @@ function anadirNotaPopup(id, territorioId) {
   };
 }
 
-
-
-
-
-
-
-
 function verNotas(id, territorioId) {
   ocultarMenu();
   var notasPoligonos = JSON.parse(localStorage.getItem(territorioId + "_notas") || "{}");
