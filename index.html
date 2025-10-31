@@ -2389,31 +2389,32 @@
         }
 
         // Loader mientras obtiene ubicación
-        const loader = document.createElement('div');
+        let loader = document.createElement('div');
+        loader.id = "loaderUbicacion";
         loader.innerHTML = `
+  <div style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  ">
     <div style="
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.5);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999;
-    ">
-      <div style="
-        width: 60px; height: 60px;
-        border: 6px solid #fff;
-        border-top: 6px solid #3498db;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      "></div>
-    </div>
-    <style>
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    </style>
-  `;
+      width: 60px; height: 60px;
+      border: 6px solid #fff;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    "></div>
+  </div>
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+`;
         document.body.appendChild(loader);
 
         seguimientoActivo = true;
@@ -2422,18 +2423,27 @@
           function (pos) {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
-            if (marcadorUbicacion) marcadorUbicacion.setLatLng([lat, lon]);
-            else marcadorUbicacion = L.marker([lat, lon]).addTo(map).openPopup();
-            map.setView([lat, lon], 17);
-            document.body.removeChild(loader);
+
+            if (marcadorUbicacion) {
+              marcadorUbicacion.setLatLng([lat, lon]);
+            } else {
+              map.setView([lat, lon], 17);
+            }
+
+            // Eliminar loader si existe
+            const loaderActivo = document.getElementById("loaderUbicacion");
+            if (loaderActivo) loaderActivo.remove();
           },
           function (err) {
             alert("Error al obtener ubicación: " + err.message);
             seguimientoActivo = false;
-            document.body.removeChild(loader);
+            const loaderActivo = document.getElementById("loaderUbicacion");
+            if (loaderActivo) loaderActivo.remove();
           },
           { enableHighAccuracy: true }
         );
+
+
       }
 
       // ====================
