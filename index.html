@@ -1486,11 +1486,13 @@
     }
     // Para mover el mapa a un área específica mostrando el loader mientras carga
     function flyWithLoader(bounds, callback) {
-      mostrarLoader(); // primero muestra el loader
-      map.flyToBounds(bounds, { padding: [20, 20] }); // mueve/centrar el mapa suavemente a los límites indicados
-      map.once('moveend', function () { // espera a que termine la animación del mapa
-        ocultarLoader(); // oculta el loader cuando terminó
-        if (callback) callback(); // si se pasó una función, la ejecuta
+      mostrarLoader();
+      map.flyToBounds(bounds, { padding: [20, 20] });
+
+      map.once('moveend', function () {
+        map.setZoom(map.getZoom() + 1.0); // acercar un poco más después del vuelo
+        ocultarLoader();
+        if (callback) callback();
       });
     }
 
