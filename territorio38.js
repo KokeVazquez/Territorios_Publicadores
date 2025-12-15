@@ -9,46 +9,46 @@ var datosTerritorio38 = {
         {
             id: "Cuadra1_Territorio38",
             coords: [
-                [[28.615542, -106.081578], [28.615101, -106.080836], [28.615602, -106.080438]]
+                [[28.611698, -106.076099], [28.611301, -106.076384], [28.610716, -106.075373], [28.611114, -106.075088]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/6CrxffphpJdLiosP9"
+            link: "https://maps.app.goo.gl/YExqVtbKLc34thQG6"
         },
         {
             id: "Cuadra2_Territorio38",
             coords: [
-                [[28.615608, -106.080342], [28.615062, -106.080772], [28.614580, -106.079888], [28.615016, -106.079579], [28.615271, -106.079992], [28.615291, -106.079989], [28.615307, -106.079971], [28.615303, -106.079948], [28.615191, -106.079767], [28.615580, -106.079476], [28.615650, -106.079537]]
+                [[28.612165, -106.075747], [28.611737, -106.076072], [28.611149, -106.075060], [28.611577, -106.074755]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/DoZ7m2PGW2AGMgYb9"
+            link: "https://maps.app.goo.gl/wu4Q2Tu2w6gb27TD7"
         },
         {
             id: "Cuadra3_Territorio38",
             coords: [
-                [[28.615548, -106.079433], [28.615443, -106.079269], [28.615052, -106.079550], [28.615161, -106.079721]]
+                [[28.611550, -106.074711], [28.611125, -106.075016], [28.610604, -106.074039], [28.611011, -106.073734]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/PziGppJedBdTQjx97"
+            link: "https://maps.app.goo.gl/CECXzZRtL3rXhvbM7"
         },
         {
-            id: "Vacio",
+            id: "Cuadra4_Territorio38",
             coords: [
-                [[28.615653, -106.079474], [28.615597, -106.079425], [28.615479, -106.079241], [28.615663, -106.079109]]
+                [[28.611086, -106.075048], [28.610688, -106.075330], [28.610136, -106.074356], [28.610562, -106.074068]]
             ],
-            color: "rgba(70, 44, 11, 1)",
-            fillOpacity: 1.0,
+            color: "rgba(35, 168, 14, 1)",
+            fillOpacity: 0.8,
             weight: 2,
-            label: null,
-            link: "https://maps.app.goo.gl/VZ4hoW6iWuveGpJM6"
+            label: "4",
+            link: "https://maps.app.goo.gl/uv1jeqetwuxomW1p9"
         }
     ],
 };
@@ -62,7 +62,7 @@ var territorio38 = territorio38Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio38.poligonos.find(p => p.id === "Cuadra3_Territorio38"); // Usamos polígono 2 para centrar
+var polFijo = datosTerritorio38.poligonos.find(p => p.id === "Cuadra3_Territorio38");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio38 = L.marker(centro, {

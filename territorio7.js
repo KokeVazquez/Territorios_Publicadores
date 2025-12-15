@@ -9,46 +9,57 @@ var datosTerritorio7 = {
         {
             id: "Cuadra1_Territorio7",
             coords: [
-                [28.613577, -106.085604], [28.613114, -106.086416], [28.612568, -106.085469], [28.612999, -106.085158], [28.613114, -106.085320], [28.613195, -106.085419], [28.613229, -106.085445], [28.613299, -106.085485]
+                [[28.615911, -106.074732], [28.615873, -106.075000], [28.615839, -106.075339], [28.615538, -106.074780], [28.615968, -106.074478]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/yBYbVBiKe2HgV8Lg7"
+            link: "https://maps.app.goo.gl/did9y7mgTCBf5KfP9"
         },
         {
             id: "Cuadra2_Territorio7",
             coords: [
-                [28.613731, -106.085329], [28.613600, -106.085565], [28.613306, -106.085441], [28.613245, -106.085406], [28.613205, -106.085370], [28.613030, -106.085131], [28.613458, -106.084824]
+                [[28.615981, -106.074413], [28.615516, -106.074740], [28.615247, -106.074265], [28.616140, -106.073630], [28.616220, -106.073720]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/VxybetE6qLHYPZ2E6"
+            link: "https://maps.app.goo.gl/vPwgKQzMBrocymEX8"
         },
         {
             id: "Cuadra3_Territorio7",
             coords: [
-                [28.613436, -106.084788], [28.613006, -106.085099], [28.612452, -106.084124], [28.612870, -106.083815]
+                [[28.616113, -106.073598], [28.615860, -106.073140], [28.614976, -106.073773], [28.615224, -106.074227]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/77unnRjpunTAFYgv9"
+            link: "https://maps.app.goo.gl/fb1kuxMDjGSpCLFm7"
         },
         {
             id: "Cuadra4_Territorio7",
             coords: [
-                [28.612972, -106.085119], [28.612548, -106.085431], [28.612004, -106.084440], [28.612417, -106.084146]
+                [[28.616420, -106.072737], [28.616593, -106.073009], [28.616231, -106.073657], [28.616160, -106.073576], [28.615907, -106.073117]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/uGd4bwj6XjgXBgvj9"
+            link: "https://maps.app.goo.gl/1pS6UHpQBgybqYVo8"
+        },
+        {
+            id: "Cuadra5_Territorio7",
+            coords: [
+                [[28.616469, -106.072686], [28.616881, -106.072353], [28.617025, -106.072462], [28.616637, -106.072956]]
+            ],
+            color: "rgba(221, 210, 0, 1)",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "5",
+            link: "https://maps.app.goo.gl/GxRB9Df9DNEC378NA"
         }
     ],
 };
@@ -56,13 +67,13 @@ var datosTerritorio7 = {
 // ------------------------------
 // Crear territorio con base
 // ------------------------------
-var territorio7Data = crearTerritorio(datosTerritorio7);
-var territorio7 = territorio7Data.grupo;
+var territorio56Data = crearTerritorio(datosTerritorio7);
+var territorio7 = territorio56Data.grupo;
 
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio7.poligonos.find(p => p.id === "Cuadra3_Territorio7");
+var polFijo = datosTerritorio7.poligonos.find(p => p.id === "Cuadra4_Territorio7");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio7 = L.marker(centro, {

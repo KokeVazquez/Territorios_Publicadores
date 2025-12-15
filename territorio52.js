@@ -9,46 +9,56 @@ var datosTerritorio52 = {
         {
             id: "Cuadra1_Territorio52",
             coords: [
-                [[28.614916, -106.073760], [28.614621, -106.073243], [28.613731, -106.073881], [28.614032, -106.074402]]
+                [[28.612627, -106.081120], [28.611768, -106.081755], [28.611504, -106.081300], [28.612367, -106.080691]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/5uWu6QeRu6ZpzTQz7"
+            link: "https://maps.app.goo.gl/cYZSMEzSvVF3beEi8"
         },
         {
             id: "Cuadra2_Territorio52",
             coords: [
-                [[28.614600, -106.073202], [28.614339, -106.072742], [28.613480, -106.073394], [28.613715, -106.073819]]
+                [[28.612327, -106.080642], [28.611479, -106.081263], [28.611207, -106.080784], [28.612055, -106.080165]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/UEvCAgTCpxwbA4kW6"
+            link: "https://maps.app.goo.gl/8DDyzDQApaNGJg3Y7"
         },
         {
             id: "Cuadra3_Territorio52",
             coords: [
-                [[28.614285, -106.072721], [28.612881, -106.072387], [28.613440, -106.073347]]
+                [[28.611179, -106.080728], [28.612023, -106.080102], [28.611772, -106.079666], [28.610935, -106.080279]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/F5phTGVoruqkU5w26"
+            link: "https://maps.app.goo.gl/Q3pULjcEnxkWxXNy8"
         },
         {
             id: "Cuadra4_Territorio52",
             coords: [
-                [[28.614300, -106.072673], [28.612886, -106.072337], [28.613759, -106.071721]]
-            ],
-            color: "rgba(255, 7, 7, 1)",
+                [[28.611738, -106.079604], [28.611503, -106.079182], [28.610660, -106.079800], [28.610899, -106.080227]]],
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/C5qznPcAHuE4pa8M8"
+            link: "https://maps.app.goo.gl/BUoB8rUPn3gh6moM7"
+        },
+        {
+            id: "Escuela",
+            coords: [
+                [[28.613201, -106.082124], [28.612332, -106.082754], [28.611839, -106.081882], [28.612699, -106.081259]]
+            ],
+            color: "rgba(70, 44, 11, 1)",
+            fillOpacity: 1.0,
+            weight: 2,
+            label: "Escuela",
+            link: "https://maps.app.goo.gl/DCdBfeBLiPi4g2Hn7"
         }
     ],
 };

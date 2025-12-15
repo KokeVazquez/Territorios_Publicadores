@@ -9,79 +9,46 @@ var datosTerritorio40 = {
         {
             id: "Cuadra1_Territorio40",
             coords: [
-                [[28.613544, -106.077098], [28.613755, -106.077425], [28.613550, -106.077577], [28.613349, -106.077719], [28.612782, -106.076763], [28.613205, -106.076475]]
+                [[28.609819, -106.071652], [28.609551, -106.071184], [28.608696, -106.071823], [28.608956, -106.072298]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/FfsLngofmtwfG3kd9"
+            link: "https://maps.app.goo.gl/QcTPfViuZiD1PSWP7"
         },
         {
             id: "Cuadra2_Territorio40",
             coords: [
-                [[28.614224, -106.077086], [28.614031, -106.076752], [28.613590, -106.077075], [28.613800, -106.077399]]
+                [[28.609528, -106.071139], [28.609260, -106.070659], [28.608406, -106.071318], [28.608672, -106.071785]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/WpXtA25BYJgREfqZ8"
+            link: "https://maps.app.goo.gl/iF2WyGcCAioKbbS1A"
         },
         {
             id: "Cuadra3_Territorio40",
             coords: [
-                [[28.613955, -106.076602], [28.614017, -106.076723], [28.613572, -106.077046], [28.613243, -106.076447], [28.613675, -106.076144]]
+                [[28.609236, -106.070613], [28.608976, -106.070123], [28.608105, -106.070772], [28.608382, -106.071272]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/zttFaAcDYmfyhyhg6"
+            link: "https://maps.app.goo.gl/zHNwpgp3ZCkMtnni8"
         },
         {
             id: "Cuadra4_Territorio40",
             coords: [
-                [[28.613648, -106.076100], [28.613220, -106.076404], [28.612699, -106.075434], [28.613123, -106.075131]]
+                [[28.608951, -106.070081], [28.608689, -106.069633], [28.607826, -106.070257], [28.608080, -106.070731]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/k2PMGpMMmkfQ7Hrn6"
-        },
-        {
-            id: "Cuadra5_Territorio40",
-            coords: [
-                [[28.613180, -106.076433], [28.612761, -106.076717], [28.612230, -106.075765], [28.612660, -106.075465]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/W9ufeFkZqiJqHtre8"
-        },
-        {
-            id: "Cuadra6_Territorio40",
-            coords: [
-                [[28.613097, -106.075082], [28.612203, -106.075716], [28.611932, -106.075236], [28.612815, -106.074581]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "6",
-            link: "https://maps.app.goo.gl/vqXdqEjQ235MERnR7"
-        },
-        {
-            id: "Cuadra7_Territorio40",
-            coords: [
-                [[28.612787, -106.074538], [28.612519, -106.074071], [28.611614, -106.074725], [28.611905, -106.075191]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "7",
-            link: "https://maps.app.goo.gl/WgRrs5eoZkzHCtLZ8"
+            link: "https://maps.app.goo.gl/gHmBsz5kjH13DcaZ6"
         }
     ],
 };
@@ -95,7 +62,7 @@ var territorio40 = territorio40Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio40.poligonos.find(p => p.id === "Cuadra4_Territorio40");
+var polFijo = datosTerritorio40.poligonos.find(p => p.id === "Cuadra3_Territorio40");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio40 = L.marker(centro, {

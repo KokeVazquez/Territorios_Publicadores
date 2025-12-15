@@ -9,57 +9,46 @@ var datosTerritorio61 = {
         {
             id: "Cuadra1_Territorio61",
             coords: [
-                [[28.613097, -106.069281], [28.612606, -106.069627], [28.612054, -106.068652], [28.612554, -106.068280]]
+                [28.609449, -106.077743], [28.608590, -106.078375], [28.608323, -106.077873], [28.609166, -106.077245]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/PNLKkp3UkgMFzW6K9"
+            link: "https://maps.app.goo.gl/dMfSGzL2AV2DTPsk7"
         },
         {
             id: "Cuadra2_Territorio61",
             coords: [
-                [[28.613466, -106.069009], [28.612914, -106.068015], [28.612648, -106.068213], [28.613206, -106.069192]]
+                [28.609140, -106.077204], [28.608294, -106.077820], [28.608026, -106.077336], [28.608852, -106.076711]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/nRvJWtPCrfMvPGKP6"
+            link: "https://maps.app.goo.gl/9Rpwso96CcmNaruGA"
         },
         {
             id: "Cuadra3_Territorio61",
             coords: [
-                [[28.614079, -106.068542], [28.613545, -106.067550], [28.612964, -106.067981], [28.613516, -106.068970]]
+                [28.608824, -106.076669], [28.608427, -106.076967], [28.607885, -106.076014], [28.608076, -106.075872], [28.608268, -106.075728]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/U16zKnoDS6YLoyyA7"
+            link: "https://maps.app.goo.gl/8rX8cdWLjvtFLDyt9"
         },
         {
             id: "Cuadra4_Territorio61",
             coords: [
-                [[28.614968, -106.067912], [28.614701, -106.067462], [28.614644, -106.067484], [28.614605, -106.067516], [28.613885, -106.068051], [28.614130, -106.068509]]
+                [28.608389, -106.076997], [28.607983, -106.077295], [28.607437, -106.076337], [28.607847, -106.076041]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/BiDv4iAh1xsTNK5fA"
-        },
-        {
-            id: "Cuadra5_Territorio61",
-            coords: [
-                [[28.614668, -106.067406], [28.614611, -106.067432], [28.613856, -106.067994], [28.613592, -106.067511], [28.614412, -106.066934]]
-            ],
-            color: "rgba(255, 7, 7, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/2YNiRRLfmfRYinxg7"
+            link: "https://maps.app.goo.gl/VHttspBfmHrao28Z9"
         }
     ],
 };

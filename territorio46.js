@@ -9,46 +9,46 @@ var datosTerritorio46 = {
         {
             id: "Cuadra1_Territorio46",
             coords: [
-                [[28.615115, -106.076444], [28.614854, -106.075972], [28.614003, -106.076598], [28.614261, -106.077060]]
+                [[28.610846, -106.076723], [28.610396, -106.077068], [28.609789, -106.076030], [28.610253, -106.075716]]
             ],
-            color: "blue",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/FhYTtPDgZ1SGxDqF9"
+            link: "https://maps.app.goo.gl/GiR1b5e76xpwisEh9"
         },
         {
             id: "Cuadra2_Territorio46",
             coords: [
-                [[28.614832, -106.075930], [28.614570, -106.075478], [28.613714, -106.076113], [28.613977, -106.076556]]
+                [[28.611241, -106.076430], [28.610884, -106.076689], [28.610295, -106.075678], [28.610655, -106.075420]]
             ],
-            color: "blue",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/sSzVE1ijzmfpzZ4H7"
+            link: "https://maps.app.goo.gl/pvgp1UW8A85PbwiZA"
         },
         {
             id: "Cuadra3_Territorio46",
             coords: [
-                [[28.614547, -106.075438], [28.614143, -106.075744], [28.613593, -106.074779], [28.614000, -106.074484]]
+                [[28.610627, -106.075372], [28.609760, -106.075985], [28.609503, -106.075527], [28.610367, -106.074906]]
             ],
-            color: "blue",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/9k3Kt7Z3nKk9dMd79"
+            link: "https://maps.app.goo.gl/Giis9utXPQ1opYAg8"
         },
         {
             id: "Cuadra4_Territorio46",
             coords: [
-                [[28.614108, -106.075772], [28.613688, -106.076075], [28.613161, -106.075099], [28.613556, -106.074810]]
+                [[28.610337, -106.074859], [28.609473, -106.075482], [28.609213, -106.075025], [28.610072, -106.074408]]
             ],
-            color: "blue",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/pdQ3sPHYgKqfzd117"
+            link: "https://maps.app.goo.gl/4ABZJQfAqXJCPKEz8"
         }
     ],
 };
@@ -62,7 +62,7 @@ var territorio46 = territorio46Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio46.poligonos.find(p => p.id === "Cuadra2_Territorio46"); // Centramos en polígono 2
+var polFijo = datosTerritorio46.poligonos.find(p => p.id === "Cuadra3_Territorio46");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio46 = L.marker(centro, {

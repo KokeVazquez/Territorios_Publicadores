@@ -7,37 +7,92 @@ var datosTerritorio31 = {
     numeroTerritorio: 31, // Número que se mostrará en el marcador principal
     poligonos: [
         {
+            id: "Parque",
+            coords: [
+                [[28.611966, -106.073011], [28.612525, -106.074007], [28.612270, -106.074192], [28.611725, -106.073190]]
+            ],
+            color: "rgba(70, 44, 11, 1)",
+            fillOpacity: 1.0,
+            weight: 2,
+            label: "Parque",
+            link: "https://maps.app.goo.gl/Zhrny1dnb3fVuKhf9"
+        },
+        {
+            id: "Escuela",
+            coords: [
+                [[28.612199, -106.074241], [28.611590, -106.074685], [28.611050, -106.073698], [28.611656, -106.073242]]
+            ],
+            color: "rgba(70, 44, 11, 1)",
+            fillOpacity: 1.0,
+            weight: 2,
+            label: "Escuela",
+            link: "https://maps.app.goo.gl/jVi86ZbvbzcaDYqg8"
+        },
+        {
             id: "Cuadra1_Territorio31",
             coords: [
-                [[28.614460, -106.079782], [28.613590, -106.080402], [28.613231, -106.079733], [28.614190, -106.079318]]
+                [[28.611864, -106.072990], [28.611625, -106.072531], [28.610750, -106.073168], [28.611009, -106.073626]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/Yq8paXGoUcr17ZGBA"
+            link: "https://maps.app.goo.gl/DNjH6xtMx96a1MqW9"
         },
         {
             id: "Cuadra2_Territorio31",
             coords: [
-                [[28.614166, -106.079276], [28.613547, -106.079462], [28.613209, -106.079686], [28.613069, -106.079444], [28.613912, -106.078831]]
+                [[28.611601, -106.072488], [28.611352, -106.072018], [28.611111, -106.072181], [28.610450, -106.072663], [28.610722, -106.073127]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/zMK7rpWmqjaa9gBm9"
+            link: "https://maps.app.goo.gl/MpGxPY4BPJ4nJiGz6"
         },
         {
             id: "Cuadra3_Territorio31",
             coords: [
-                [[28.613853, -106.078754], [28.613029, -106.079345], [28.612531, -106.078459], [28.613346, -106.077854]]
+                [[28.611316, -106.071947], [28.611034, -106.072146], [28.610525, -106.071696], [28.610988, -106.071371]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/EMrkbmNwdzPhiVeW7"
+            link: "https://maps.app.goo.gl/7RzafDLrENnLJSFs8"
+        },
+        {
+            id: "Cuadra4_Territorio31",
+            coords: [
+                [[28.610966, -106.071329], [28.610789, -106.071002], [28.610490, -106.071214], [28.610211, -106.071420], [28.610488, -106.071662]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "4",
+            link: "https://maps.app.goo.gl/Y5hGEdG3qRMLnBKp8"
+        },
+        {
+            id: "Cuadra5_Territorio31",
+            coords: [
+                [[28.610567, -106.071800], [28.610471, -106.071709], [28.610173, -106.071448], [28.609881, -106.071666], [28.610140, -106.072112]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "5",
+            link: "https://maps.app.goo.gl/2D15kPMpAnwkeiK99"
+        },
+        {
+            id: "Cuadra6_Territorio31",
+            coords: [
+                [[28.610599, -106.071833], [28.610995, -106.072175], [28.610414, -106.072597], [28.610168, -106.072154]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "6",
+            link: "https://maps.app.goo.gl/fRZRf9maXftXs3fM7"
         }
     ],
 };
@@ -51,7 +106,7 @@ var territorio31 = territorio31Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio31.poligonos.find(p => p.id === "Cuadra2_Territorio31"); // Usamos el polígono 2 para centrar
+var polFijo = datosTerritorio31.poligonos.find(p => p.id === "Cuadra1_Territorio31");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio31 = L.marker(centro, {

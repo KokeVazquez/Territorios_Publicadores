@@ -9,35 +9,46 @@ var datosTerritorio53 = {
         {
             id: "Cuadra1_Territorio53",
             coords: [
-                [[28.613212, -106.072012], [28.612828, -106.072292], [28.612280, -106.071323], [28.612669, -106.071047]]
+                [[28.611474, -106.079081], [28.610608, -106.079728], [28.610351, -106.079277], [28.611218, -106.078626]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/JnKWam1tuFJv51Qd8"
+            link: "https://maps.app.goo.gl/F9LerT8FkfDYdTQm6"
         },
         {
             id: "Cuadra2_Territorio53",
             coords: [
-                [[28.613386, -106.071067], [28.613723, -106.071658], [28.613250, -106.071981], [28.612705, -106.071019], [28.613169, -106.070711]]
+                [[28.611181, -106.078585], [28.610329, -106.079218], [28.610090, -106.078753], [28.610926, -106.078134]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/o1mPheyaFMKHZWjaA"
+            link: "https://maps.app.goo.gl/DjAVtkseeDsGDYLV8"
         },
         {
             id: "Cuadra3_Territorio53",
             coords: [
-                [[28.613142, -106.070666], [28.612594, -106.069690], [28.611738, -106.070316], [28.612264, -106.071271]]
+                [[28.610889, -106.078071], [28.610057, -106.078690], [28.609820, -106.078255], [28.610649, -106.077640]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/knUYM1FBW2GY33Ez5"
+            link: "https://maps.app.goo.gl/VVo8CcDCe63mSTAP8"
+        },
+        {
+            id: "Cuadra4_Territorio53",
+            coords: [
+                [[28.610611, -106.077579], [28.609788, -106.078199], [28.609538, -106.077762], [28.610377, -106.077157]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "4",
+            link: "https://maps.app.goo.gl/NE9AYcRK3foXrC4J9"
         }
     ],
 };
@@ -51,7 +62,7 @@ var territorio53 = territorio53Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio53.poligonos.find(p => p.id === "Cuadra2_Territorio53");
+var polFijo = datosTerritorio53.poligonos.find(p => p.id === "Cuadra3_Territorio53");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio53 = L.marker(centro, {

@@ -8,80 +8,43 @@ var datosTerritorio50 = {
     poligonos: [
         {
             id: "Cuadra1_Territorio50",
-            coords: [
-                [[28.610462, -106.068270], [28.609621, -106.068876], [28.609356, -106.068421], [28.610202, -106.067813], [28.610278, -106.067938], [28.610080, -106.068224], [28.610089, -106.068247], [28.610103, -106.068245], [28.610291, -106.067973]]
+            coords: [[28.614713, -106.083654], [28.614397, -106.084045], [28.613861, -106.083101], [28.614253, -106.082814]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/uDdTjcAFyEZjUyS77"
+            link: "https://maps.app.goo.gl/hoyTFrhhk2V7nPiP6"
         },
         {
             id: "Cuadra2_Territorio50",
-            coords: [
-                [[28.610179, -106.067769], [28.609907, -106.067306], [28.609051, -106.067896], [28.609329, -106.068378]]
+            coords: [[28.615082, -106.083185], [28.614794, -106.083663], [28.614307, -106.082772], [28.614694, -106.082512]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/t7GSQHcvsBxsa94u6"
+            link: "https://maps.app.goo.gl/V1BBrFserrMeHjAE8"
         },
         {
             id: "Cuadra3_Territorio50",
-            coords: [
-                [[28.609884, -106.067264], [28.609709, -106.066938], [28.609590, -106.066767], [28.608742, -106.067391], [28.609024, -106.067856]]
+            coords: [[28.615335, -106.082520], [28.615112, -106.083115], [28.614745, -106.082468], [28.615122, -106.082191]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/NDFFbZULAV1TncPQ9"
+            link: "https://maps.app.goo.gl/6fPL7WCvwZxbWWkB9"
         },
         {
             id: "Cuadra4_Territorio50",
-            coords: [
-                [[28.609565, -106.066724], [28.609295, -106.066285], [28.608452, -106.066909], [28.608716, -106.067350]]
+            coords: [[28.615476, -106.081943], [28.615361, -106.082441], [28.615179, -106.082159]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/M8UWPma3ikXdi1AF8"
-        },
-        {
-            id: "Cuadra5_Territorio50",
-            coords: [
-                [[28.609272, -106.066243], [28.608979, -106.065753], [28.608159, -106.066369], [28.608428, -106.066852]]
-            ],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/HDrAUJ9QK4u6ZwAH9"
-        },
-        {
-            id: "Cuadra6_Territorio50",
-            coords: [
-                [[28.608956, -106.065717], [28.608764, -106.065423], [28.608628, -106.065242], [28.607829, -106.065859], [28.608123, -106.066323]]
-            ],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "6",
-            link: "https://maps.app.goo.gl/35YUWUNXWtWkamaK9"
-        },
-        {
-            id: "Cuadra7_Territorio50",
-            coords: [
-                [[28.607802, -106.065821], [28.608318, -106.065419], [28.607542, -106.065424]]
-            ],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "7",
-            link: "https://maps.app.goo.gl/mjWo4YyYDSq31yXW7"
+            link: "https://maps.app.goo.gl/FamA74hNLsgjr1P36"
         }
     ],
 };
@@ -95,7 +58,7 @@ var territorio50 = territorio50Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio50.poligonos.find(p => p.id === "Cuadra4_Territorio50");
+var polFijo = datosTerritorio50.poligonos.find(p => p.id === "Cuadra2_Territorio50");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio50 = L.marker(centro, {

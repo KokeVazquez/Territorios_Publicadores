@@ -9,57 +9,46 @@ var datosTerritorio47 = {
         {
             id: "Cuadra1_Territorio47",
             coords: [
-                [[28.613976, -106.074442], [28.613676, -106.073921], [28.612850, -106.074550], [28.613137, -106.075059]]
+                [[28.612394, -106.078425], [28.611517, -106.079054], [28.611260, -106.078602], [28.612115, -106.077966]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/txh9cjQq4dJVvtNR8"
+            link: "https://maps.app.goo.gl/cn3qbbQis7rrEuzs6"
         },
         {
             id: "Cuadra2_Territorio47",
             coords: [
-                [[28.613651, -106.073883], [28.613406, -106.073431], [28.612558, -106.074046], [28.612826, -106.074511]]
+                [[28.612090, -106.077922], [28.611233, -106.078552], [28.610969, -106.078090], [28.611825, -106.077479]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/v8piEFbpomUfBXXF7"
+            link: "https://maps.app.goo.gl/XxEdmaMiXQCzDEu86"
         },
         {
             id: "Cuadra3_Territorio47",
             coords: [
-                [[28.613385, -106.073391], [28.613006, -106.073669], [28.612751, -106.073209], [28.612728, -106.073209], [28.612714, -106.073221], [28.612715, -106.073237], [28.612724, -106.073268], [28.612968, -106.073691], [28.612550, -106.073987], [28.611991, -106.072989], [28.612376, -106.072707], [28.612572, -106.073046], [28.612996, -106.072713]]
+                [[28.611794, -106.077426], [28.610941, -106.078043], [28.610692, -106.077599], [28.611557, -106.076990]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/Bi6WBz7VNAepjCrMA"
+            link: "https://maps.app.goo.gl/tUiLb4r6i4Fmar4g6"
         },
         {
-            id: "Escuela",
+            id: "Cuadra4_Territorio47",
             coords: [
-                [[28.612962, -106.072681], [28.612804, -106.072402], [28.612416, -106.072689], [28.612585, -106.072979]]
+                [[28.611528, -106.076934], [28.610660, -106.077558], [28.610423, -106.077114], [28.611268, -106.076478]]
             ],
-            color: "rgba(70, 44, 11, 1)",
-            fillOpacity: 1.0,
+            color: "rgba(255, 7, 7, 1)",
+            fillOpacity: 0.8,
             weight: 2,
-            label: "Escuela",
-            link: "https://maps.app.goo.gl/WnGVaDDDmagZ5czJ8"
-        },
-        {
-            id: "Asilo",
-            coords: [
-                [[28.612665, -106.073895], [28.612553, -106.073978], [28.612366, -106.073636], [28.612475, -106.073556]]
-            ],
-            color: "rgba(70, 44, 11, 1)",
-            fillOpacity: 1.0,
-            weight: 2,
-            label: "Asilo",
-            link: "https://maps.app.goo.gl/uyAAWqkFzFRWbbLN6"
+            label: "4",
+            link: "https://maps.app.goo.gl/iYgXR8M5xdqbE92B9"
         }
     ],
 };

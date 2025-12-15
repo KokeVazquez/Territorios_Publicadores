@@ -9,46 +9,46 @@ var datosTerritorio65 = {
         {
             id: "Cuadra1_Territorio65",
             coords: [
-                [[28.611115, -106.064872], [28.610829, -106.064379], [28.610191, -106.065363], [28.610273, -106.065501]]
+                [28.613577, -106.085604], [28.613114, -106.086416], [28.612568, -106.085469], [28.612999, -106.085158], [28.613114, -106.085320], [28.613195, -106.085419], [28.613229, -106.085445], [28.613299, -106.085485]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/VTUNYKgvzJ9pn6hf9"
+            link: "https://maps.app.goo.gl/yBYbVBiKe2HgV8Lg7"
         },
         {
             id: "Cuadra2_Territorio65",
             coords: [
-                [[28.611158, -106.064847], [28.610855, -106.064341], [28.611305, -106.063621], [28.611729, -106.064420]]
+                [28.613731, -106.085329], [28.613600, -106.085565], [28.613306, -106.085441], [28.613245, -106.085406], [28.613205, -106.085370], [28.613030, -106.085131], [28.613458, -106.084824]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/TGofCLY69XREuacC6"
+            link: "https://maps.app.goo.gl/VxybetE6qLHYPZ2E6"
         },
         {
             id: "Cuadra3_Territorio65",
             coords: [
-                [[28.612186, -106.064101], [28.611775, -106.064397], [28.611330, -106.063583], [28.611602, -106.063184], [28.611649, -106.063130]]
+                [28.613436, -106.084788], [28.613006, -106.085099], [28.612452, -106.084124], [28.612870, -106.083815]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/ASaJUFGACM8hkZWf6"
+            link: "https://maps.app.goo.gl/77unnRjpunTAFYgv9"
         },
         {
             id: "Cuadra4_Territorio65",
             coords: [
-                [[28.612634, -106.063786], [28.612220, -106.064078], [28.611677, -106.063098], [28.611755, -106.063017], [28.612083, -106.062784]]
+                [28.612972, -106.085119], [28.612548, -106.085431], [28.612004, -106.084440], [28.612417, -106.084146]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/3vRDS2otgNTGqTo98"
+            link: "https://maps.app.goo.gl/uGd4bwj6XjgXBgvj9"
         }
     ],
 };
@@ -62,7 +62,7 @@ var territorio65 = territorio65Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio65.poligonos.find(p => p.id === "Cuadra2_Territorio65");
+var polFijo = datosTerritorio65.poligonos.find(p => p.id === "Cuadra3_Territorio65");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio65 = L.marker(centro, {

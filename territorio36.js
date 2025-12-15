@@ -9,35 +9,35 @@ var datosTerritorio36 = {
         {
             id: "Cuadra1_Territorio36",
             coords: [
-                [[28.608649, -106.069565], [28.608387, -106.069136], [28.607511, -106.069757], [28.607779, -106.070196]]
+                [[28.614460, -106.079782], [28.613590, -106.080402], [28.613231, -106.079733], [28.614190, -106.079318]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/siAoCdiLqgvYsUf46"
+            link: "https://maps.app.goo.gl/Yq8paXGoUcr17ZGBA"
         },
         {
             id: "Cuadra2_Territorio36",
             coords: [
-                [[28.608362, -106.069088], [28.608091, -106.068615], [28.607219, -106.069227], [28.607483, -106.069714]]
+                [[28.614166, -106.079276], [28.613547, -106.079462], [28.613209, -106.079686], [28.613069, -106.079444], [28.613912, -106.078831]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/W2LEFAPAKH2xaKHB8"
+            link: "https://maps.app.goo.gl/zMK7rpWmqjaa9gBm9"
         },
         {
             id: "Cuadra3_Territorio36",
             coords: [
-                [[28.608063, -106.068570], [28.607501, -106.067587], [28.606640, -106.068198], [28.607192, -106.069185]]
+                [[28.613853, -106.078754], [28.613029, -106.079345], [28.612531, -106.078459], [28.613346, -106.077854]]
             ],
-            color: "fuchsia",
+            color: "rgba(255, 7, 7, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/T6NEVFtmtx8zEaf96"
+            link: "https://maps.app.goo.gl/EMrkbmNwdzPhiVeW7"
         }
     ],
 };

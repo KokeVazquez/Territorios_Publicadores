@@ -9,46 +9,46 @@ var datosTerritorio39 = {
         {
             id: "Cuadra1_Territorio39",
             coords: [
-                [[28.615108, -106.078651], [28.615358, -106.079120], [28.614498, -106.079740], [28.614228, -106.079274]]
+                [[28.610971, -106.073661], [28.610540, -106.073986], [28.610093, -106.074289], [28.609837, -106.073843], [28.610707, -106.073197]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/r2KBsSLVhzwx4EsRA"
+            link: "https://maps.app.goo.gl/1x3R27shFDjgSdct6"
         },
         {
             id: "Cuadra2_Territorio39",
             coords: [
-                [[28.615054, -106.078557], [28.614839, -106.078145], [28.613949, -106.078802], [28.614182, -106.079190]]
+                [[28.610681, -106.073152], [28.609810, -106.073797], [28.609561, -106.073339], [28.610415, -106.072694]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/CD6rK9wMYnDfCHEq6"
+            link: "https://maps.app.goo.gl/q9e1rNAJ8kKYawtw5"
         },
         {
             id: "Cuadra3_Territorio39",
             coords: [
-                [[28.614802, -106.078075], [28.614264, -106.077157], [28.613844, -106.077465], [28.614393, -106.078378]]
+                [[28.610377, -106.072627], [28.609520, -106.073274], [28.609266, -106.072824], [28.610126, -106.072186]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/hovoqBaBedLQr5KQ9"
+            link: "https://maps.app.goo.gl/XcbDQ7F3i2wi1CJ37"
         },
         {
             id: "Cuadra4_Territorio39",
             coords: [
-                [[28.614354, -106.078410], [28.613911, -106.078732], [28.613389, -106.077794], [28.613799, -106.077495]]
+                [[28.610100, -106.072141], [28.609843, -106.071695], [28.608983, -106.072342], [28.609238, -106.072779]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/PHzX3LbfMKH2prbK9"
+            link: "https://maps.app.goo.gl/XcbDQ7F3i2wi1CJ37"
         }
     ],
 };

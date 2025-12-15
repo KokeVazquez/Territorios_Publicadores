@@ -9,46 +9,66 @@ var datosTerritorio51 = {
         {
             id: "Cuadra1_Territorio51",
             coords: [
-                [[28.615826, -106.075403], [28.615780, -106.075326], [28.614909, -106.075928], [28.615169, -106.076401], [28.615803, -106.075942]]
+                [[28.614078, -106.084758], [28.613760, -106.085270], [28.613505, -106.084802], [28.613930, -106.084494]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/YbVHYGfLS7JY5RHz7"
+            link: "https://maps.app.goo.gl/a3G49hXDi8rSEB3Q7"
         },
         {
             id: "Cuadra2_Territorio51",
             coords: [
-                [[28.615758, -106.075279], [28.615501, -106.074809], [28.615060, -106.075117], [28.614628, -106.075436], [28.614888, -106.075887]]
+                [[28.614110, -106.084702], [28.614399, -106.084245], [28.614354, -106.084173], [28.613974, -106.084455]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/MTybsw8kmsGngqVUA"
+            link: "https://maps.app.goo.gl/8vTB2vWBrfRdbMjH7"
         },
         {
             id: "Cuadra3_Territorio51",
             coords: [
-                [[28.615473, -106.074765], [28.615047, -106.075062], [28.614506, -106.074119], [28.614939, -106.073805]]
+                [[28.614319, -106.084121], [28.613953, -106.084395], [28.613399, -106.083445], [28.613777, -106.083173]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/64hTLdZVThKKHBX27"
+            link: "https://maps.app.goo.gl/nPihTkWFqmhQLigi9"
         },
         {
             id: "Cuadra4_Territorio51",
             coords: [
-                [[28.615010, -106.075089], [28.614602, -106.075392], [28.614056, -106.074442], [28.614467, -106.074149]]
+                [[28.613740, -106.083101], [28.612886, -106.083734], [28.612644, -106.083300], [28.613497, -106.082677]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/d9aaXW5VW14UvbWRA"
+            link: "https://maps.app.goo.gl/YTHwjeNiNoKizXYS8"
+        },
+        {
+            id: "Cuadra5_Territorio51",
+            coords: [
+                [[28.613458, -106.082610], [28.612604, -106.083244], [28.612368, -106.082793], [28.613213, -106.082183]]],
+            color: "rgba(35, 168, 14, 1)",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "5",
+            link: "https://maps.app.goo.gl/PtzrfCvrhnqqJk8CA"
+        },
+        {
+            id: "Cuadra6_Territorio51",
+            coords: [
+                [[28.613899, -106.084440], [28.613471, -106.084750], [28.612923, -106.083793], [28.613343, -106.083494]]],
+            color: "rgba(35, 168, 14, 1)",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "6",
+            link: "https://maps.app.goo.gl/BKjf9pT3CEumEgZi9"
         }
     ],
 };
@@ -62,7 +82,7 @@ var territorio51 = territorio51Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio51.poligonos.find(p => p.id === "Cuadra2_Territorio51");
+var polFijo = datosTerritorio51.poligonos.find(p => p.id === "Cuadra3_Territorio51");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio51 = L.marker(centro, {

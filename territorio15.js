@@ -9,66 +9,46 @@ var datosTerritorio15 = {
         {
             id: "Cuadra1_Territorio15",
             coords: [
-                [[28.614078, -106.084758], [28.613760, -106.085270], [28.613505, -106.084802], [28.613930, -106.084494]]
+                [[28.611705, -106.065929], [28.611423, -106.065438], [28.610588, -106.066061], [28.610852, -106.066551]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/a3G49hXDi8rSEB3Q7"
+            link: "https://maps.app.goo.gl/MF4ruK61yMm6QdQY6"
         },
         {
             id: "Cuadra2_Territorio15",
             coords: [
-                [[28.614110, -106.084702], [28.614399, -106.084245], [28.614354, -106.084173], [28.613974, -106.084455]]
+                [[28.611401, -106.065395], [28.611144, -106.064913], [28.610294, -106.065539], [28.610566, -106.066018]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/8vTB2vWBrfRdbMjH7"
+            link: "https://maps.app.goo.gl/amyobT5kZY5rTQ2m8"
         },
         {
             id: "Cuadra3_Territorio15",
             coords: [
-                [[28.614319, -106.084121], [28.613953, -106.084395], [28.613399, -106.083445], [28.613777, -106.083173]]
+                [[28.612358, -106.065458], [28.611739, -106.065908], [28.611180, -106.064886], [28.611763, -106.064459]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/nPihTkWFqmhQLigi9"
+            link: "https://maps.app.goo.gl/9s1BzLeHPe4ByqnU6"
         },
         {
             id: "Cuadra4_Territorio15",
             coords: [
-                [[28.613740, -106.083101], [28.612886, -106.083734], [28.612644, -106.083300], [28.613497, -106.082677]]
+                [[28.613206, -106.064820], [28.612392, -106.065430], [28.611799, -106.064432], [28.612655, -106.063818]]
             ],
-            color: "rgba(35, 168, 14, 1)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/YTHwjeNiNoKizXYS8"
-        },
-        {
-            id: "Cuadra5_Territorio15",
-            coords: [
-                [[28.613458, -106.082610], [28.612604, -106.083244], [28.612368, -106.082793], [28.613213, -106.082183]]],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/PtzrfCvrhnqqJk8CA"
-        },
-        {
-            id: "Cuadra6_Territorio15",
-            coords: [
-                [[28.613899, -106.084440], [28.613471, -106.084750], [28.612923, -106.083793], [28.613343, -106.083494]]],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "6",
-            link: "https://maps.app.goo.gl/BKjf9pT3CEumEgZi9"
+            link: "https://maps.app.goo.gl/bPFjSYHGiWDSv7DSA"
         }
     ],
 };

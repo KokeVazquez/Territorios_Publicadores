@@ -9,68 +9,90 @@ var datosTerritorio63 = {
         {
             id: "Cuadra1_Territorio63",
             coords: [
-                [[28.611431, -106.067581], [28.611172, -106.067089], [28.612033, -106.066499], [28.612293, -106.066944]]
+                [28.611267, -106.082085], [28.610876, -106.082390], [28.610325, -106.081450], [28.610717, -106.081155]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/P514JYtqgxAc9gQH9"
+            link: "https://maps.app.goo.gl/cSDhdA8ytE1apoUr6"
         },
         {
             id: "Cuadra2_Territorio63",
             coords: [
-                [[28.611998, -106.066445], [28.611150, -106.067028], [28.610934, -106.066602], [28.611741, -106.066004]]
+                [[28.611556, -106.081880], [28.611015, -106.080928], [28.610764, -106.081120], [28.611316, -106.082048]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/Z6hXy4iu7PNkpBAz5"
+            link: "https://maps.app.goo.gl/RfrLgqVgVSpXU1j1A"
+        },
+        {
+            id: "Plaza_Territorio63",
+            coords: [
+                [28.611716, -106.081767], [28.611571, -106.081870], [28.611292, -106.081376], [28.611427, -106.081277]
+            ],
+            color: "rgba(35, 168, 14, 1)",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "Plaza",
+            link: "https://maps.app.goo.gl/LggasbxLpMKWSHyG7"
+        },
+        {
+            id: "Kinder_Territorio63",
+            coords: [
+                [28.611419, -106.081263], [28.611283, -106.081362], [28.611035, -106.080913], [28.611167, -106.080818]
+            ],
+            color: "rgba(70, 44, 11, 1)",
+            fillOpacity: 1.0,
+            weight: 2,
+            label: "Kinder",
+            link: "https://maps.app.goo.gl/R176do9EHrSnABJs8"
         },
         {
             id: "Cuadra3_Territorio63",
             coords: [
-                [[28.612918, -106.066466], [28.612341, -106.066908], [28.612082, -106.066461], [28.612667, -106.066018]]
+                [28.611136, -106.080762], [28.610727, -106.081061], [28.610477, -106.080605], [28.610880, -106.080311]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/nKMeDsG23WKoYveT6"
+            link: "https://maps.app.goo.gl/5V1KRbTZw3YqesXW9"
         },
         {
             id: "Cuadra4_Territorio63",
             coords: [
-                [[28.612631, -106.065968], [28.612392, -106.065536], [28.611791, -106.065975], [28.612048, -106.066407]]
+                [[28.610849, -106.080259], [28.610447, -106.080550], [28.610210, -106.080122], [28.610608, -106.079834]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/pJmZCuHnPou2mGDT9"
+            link: "https://maps.app.goo.gl/x6ruXzV4s8JhqCAAA"
         },
         {
             id: "Cuadra5_Territorio63",
             coords: [
-                [[28.612967, -106.066432], [28.612714, -106.065990], [28.613523, -106.065383], [28.613791, -106.065842]]
+                [28.610002, -106.080872], [28.609777, -106.080442], [28.610163, -106.080158], [28.610399, -106.080583]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/99VyWTXaB5nc3sEL8"
+            label: " 5",
+            link: "https://maps.app.goo.gl/34ftBBAS366GQnRs8"
         },
         {
             id: "Cuadra6_Territorio63",
             coords: [
-                [[28.613486, -106.065330], [28.613240, -106.064899], [28.612437, -106.065506], [28.612679, -106.065940]]
+                [28.610682, -106.081099], [28.610290, -106.081390], [28.610034, -106.080927], [28.610430, -106.080641]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "6",
-            link: "https://maps.app.goo.gl/HBn5rbjp7dSwyFfR7"
+            link: "https://maps.app.goo.gl/57Eve11CFZCVNcAL9"
         }
     ],
 };

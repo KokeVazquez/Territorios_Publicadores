@@ -9,90 +9,46 @@ var datosTerritorio58 = {
         {
             id: "Cuadra1_Territorio58",
             coords: [
-                [[28.614725, -106.072405], [28.614489, -106.071967], [28.614112, -106.072240], [28.614356, -106.072661]]
+                [[28.605917, -106.071561], [28.605494, -106.071855], [28.604962, -106.070892], [28.605365, -106.070612]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/d5aZPAAc4hkowDMH7"
+            link: "https://maps.app.goo.gl/9wC9xuMwjgbB3RQS8"
+        },
+        {
+            id: "Parque",
+            coords: [
+                [[28.605457, -106.071880], [28.605046, -106.072180], [28.604514, -106.071230], [28.604928, -106.070921]]
+            ],
+            color: "rgba(70, 44, 11, 1)",
+            fillOpacity: 1.0,
+            weight: 2,
+            label: "Parque",
+            link: "https://maps.app.goo.gl/GB53MoyQNpS6y7zY7"
         },
         {
             id: "Cuadra2_Territorio58",
             coords: [
-                [[28.614457, -106.071908], [28.614078, -106.072181], [28.613810, -106.071703], [28.614193, -106.071417]]
+                [[28.605343, -106.070571], [28.604939, -106.070853], [28.604342, -106.069848], [28.604791, -106.069556]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/Ztre3TEQkZAcZGVD8"
+            link: "https://maps.app.goo.gl/CADLkuEHZFtNy4je7"
         },
         {
             id: "Cuadra3_Territorio58",
             coords: [
-                [[28.615218, -106.072061], [28.614778, -106.072373], [28.614540, -106.071931], [28.614963, -106.071599]]
+                [[28.604904, -106.070876], [28.604489, -106.071195], [28.603900, -106.070256], [28.604310, -106.069875]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/ZJRzeNWdJY7SrCcc8"
-        },
-        {
-            id: "Cuadra4_Territorio58",
-            coords: [
-                [[28.614930, -106.071541], [28.614508, -106.071871], [28.614243, -106.071381], [28.614661, -106.071081]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "4",
-            link: "https://maps.app.goo.gl/Z6wkagWecCBbYg7U7"
-        },
-        {
-            id: "Cuadra5_Territorio58",
-            coords: [
-                [[28.615777, -106.071667], [28.615466, -106.071391], [28.615118, -106.071161], [28.614711, -106.071043], [28.615270, -106.072026]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/TRntndeBDMYJDaUR7"
-        },
-        {
-            id: "Cuadra6_Territorio58",
-            coords: [
-                [[28.615214, -106.070680], [28.615564, -106.071310], [28.615509, -106.071336], [28.615174, -106.071115], [28.614827, -106.070958]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "6",
-            link: "https://maps.app.goo.gl/w3n5JSH7ZQtHsWv97"
-        },
-        {
-            id: "Cuadra7_Territorio58",
-            coords: [
-                [[28.616206, -106.071334], [28.615909, -106.071563], [28.615720, -106.071323], [28.615305, -106.070614], [28.615663, -106.070365]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "7",
-            link: "https://maps.app.goo.gl/CBJ4CG1cxYSbwi4WA"
-        },
-        {
-            id: "Cuadra8_Territorio58",
-            coords: [
-                [[28.616675, -106.070984], [28.616258, -106.071298], [28.615987, -106.070828], [28.616185, -106.070689], [28.616184, -106.070662], [28.616165, -106.070645], [28.616148, -106.070639], [28.616136, -106.070646], [28.615953, -106.070776], [28.615707, -106.070328], [28.616114, -106.070028]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "8",
-            link: "https://maps.app.goo.gl/TgMjHjbbuqm4u26S6"
+            link: "https://maps.app.goo.gl/Xh9RpEr5YtBmYBZZ6"
         }
     ],
 };
@@ -106,7 +62,7 @@ var territorio58 = territorio58Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio58.poligonos.find(p => p.id === "Cuadra5_Territorio58");
+var polFijo = datosTerritorio58.poligonos.find(p => p.id === "Cuadra2_Territorio58");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio58 = L.marker(centro, {

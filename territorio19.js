@@ -9,57 +9,35 @@ var datosTerritorio19 = {
         {
             id: "Cuadra1_Territorio19",
             coords: [
-                [[28.608681, -106.075314], [28.608267, -106.075619], [28.607736, -106.074677], [28.608140, -106.074382]]
+                [[28.613212, -106.072012], [28.612828, -106.072292], [28.612280, -106.071323], [28.612669, -106.071047]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/Y3x8kLTB98XqEiBK9"
+            link: "https://maps.app.goo.gl/JnKWam1tuFJv51Qd8"
         },
         {
             id: "Cuadra2_Territorio19",
             coords: [
-                [[28.609120, -106.074983], [28.608729, -106.075279], [28.608192, -106.074340], [28.608601, -106.074044]]
+                [[28.613386, -106.071067], [28.613723, -106.071658], [28.613250, -106.071981], [28.612705, -106.071019], [28.613169, -106.070711]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/gBeiTx47C74eE157A"
+            link: "https://maps.app.goo.gl/o1mPheyaFMKHZWjaA"
         },
         {
             id: "Cuadra3_Territorio19",
             coords: [
-                [[28.608549, -106.073952], [28.607683, -106.074587], [28.607431, -106.074146], [28.608303, -106.073517]]
+                [[28.613142, -106.070666], [28.612594, -106.069690], [28.611738, -106.070316], [28.612264, -106.071271]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/4xQ4EvoRGta9eWoYA"
-        },
-        {
-            id: "Cuadra4_Territorio19",
-            coords: [
-                [[28.608270, -106.073451], [28.607792, -106.073808], [28.607663, -106.073577], [28.607268, -106.073859], [28.607152, -106.073653], [28.608034, -106.073028]]
-            ],
-            color: "rgba(255, 7, 7, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "4",
-            link: "https://maps.app.goo.gl/hhWDMxJDRjEGmyA3A"
-        },
-        {
-            id: "Kinder",
-            coords: [
-                [[28.607773, -106.073820], [28.607657, -106.073608], [28.607281, -106.073880], [28.607403, -106.074096]]
-            ],
-            color: "rgba(70, 44, 11, 1)",
-            fillOpacity: 1.0,
-            weight: 2,
-            label: "Kinder",
-            link: "https://maps.app.goo.gl/BMbaDebhCVoYkWPt6"
+            link: "https://maps.app.goo.gl/knUYM1FBW2GY33Ez5"
         }
     ],
 };
@@ -73,7 +51,7 @@ var territorio19 = territorio19Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio19.poligonos.find(p => p.id === "Cuadra3_Territorio19");
+var polFijo = datosTerritorio19.poligonos.find(p => p.id === "Cuadra2_Territorio19");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio19 = L.marker(centro, {

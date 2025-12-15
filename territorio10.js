@@ -9,46 +9,68 @@ var datosTerritorio10 = {
         {
             id: "Cuadra1_Territorio10",
             coords: [
-                [28.610554, -106.079746], [28.609727, -106.080346], [28.609478, -106.079930], [28.610309, -106.079314]
+                [[28.614186, -106.071287], [28.614032, -106.070998], [28.613980, -106.071044], [28.614139, -106.071326], [28.613757, -106.071615], [28.613439, -106.071053], [28.614293, -106.070416], [28.614607, -106.070989]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/277geuozcTWuac4U9"
+            link: "https://maps.app.goo.gl/wojX6ojzt3xFTpwu5"
         },
         {
             id: "Cuadra2_Territorio10",
             coords: [
-                [28.610275, -106.079256], [28.609442, -106.079870], [28.609191, -106.079407], [28.610041, -106.078789]
+                [[28.613408, -106.070995], [28.613219, -106.070687], [28.614101, -106.070053], [28.614266, -106.070363]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/LPaU1W9aT8jmTCL5A"
+            link: "https://maps.app.goo.gl/bAY1adSLM9pzuDdm7"
         },
         {
             id: "Cuadra3_Territorio10",
             coords: [
-                [28.610020, -106.078733], [28.609592, -106.079057], [28.609077, -106.078090], [28.609483, -106.077787]
+                [[28.615201, -106.070558], [28.614911, -106.070093], [28.614412, -106.070570], [28.614639, -106.070966]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/cNfGkoEK1aN2NZDj6"
+            link: "https://maps.app.goo.gl/mCMnUo6nCLANrfoWA"
         },
         {
             id: "Cuadra4_Territorio10",
             coords: [
-                [28.609552, -106.079081], [28.609159, -106.079351], [28.608625, -106.078425], [28.609034, -106.078130]
+                [[28.614879, -106.070039], [28.614400, -106.070509], [28.614151, -106.070018], [28.614653, -106.069639]]
             ],
-            color: "rgb(64,224,208)",
+            color: "blue",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/QTLeGvue1RrfmR2v5"
+            link: "https://maps.app.goo.gl/B17dzgunD4BjoavH9"
+        },
+        {
+            id: "Cuadra5_Territorio10",
+            coords: [
+                [[28.615605, -106.070272], [28.615252, -106.070526], [28.614704, -106.069602], [28.615081, -106.069317]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "5",
+            link: "https://maps.app.goo.gl/w6CNAkB6pqCh4vMX8"
+        },
+        {
+            id: "Cuadra6_Territorio10",
+            coords: [
+                [[28.615657, -106.070234], [28.615131, -106.069281], [28.615538, -106.068967], [28.616062, -106.069932]]
+            ],
+            color: "blue",
+            fillOpacity: 0.8,
+            weight: 2,
+            label: "6",
+            link: "https://maps.app.goo.gl/LWFq4PAzx72sTxvDA"
         }
     ],
 };
@@ -75,4 +97,3 @@ var marcadorTerritorio10 = L.marker(centro, {
 
 // Guardamos la referencia en el grupo para poder ocultarla desde index
 territorio10._marcadorTerritorio = marcadorTerritorio10;
-

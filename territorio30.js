@@ -9,46 +9,46 @@ var datosTerritorio30 = {
         {
             id: "Cuadra1_Territorio30",
             coords: [
-                [[28.615098, -106.082139], [28.614707, -106.082423], [28.614201, -106.081466], [28.614587, -106.081203]]
+                [[28.610254, -106.071328], [28.609857, -106.071621], [28.609299, -106.070633], [28.609699, -106.070342]]
             ],
             color: "fuchsia",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/MQNb3WWf666ZF9uYA"
+            link: "https://maps.app.goo.gl/cn7euWisSrpHqdL58"
         },
         {
             id: "Cuadra2_Territorio30",
             coords: [
-                [[28.615135, -106.082109], [28.614673, -106.081287], [28.614627, -106.081175], [28.615062, -106.080869], [28.615533, -106.081654], [28.615511, -106.081849]]
+                [[28.610763, -106.070961], [28.610289, -106.071301], [28.609737, -106.070314], [28.610186, -106.069991]]
             ],
             color: "fuchsia",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/fXKSFxNyjWEkgSTy7"
+            link: "https://maps.app.goo.gl/kScd7xA43UYYnS4U6"
         },
         {
             id: "Cuadra3_Territorio30",
             coords: [
-                [[28.615024, -106.080801], [28.614603, -106.081103], [28.614594, -106.081068], [28.614553, -106.080984], [28.614122, -106.080223], [28.614540, -106.079920]]
+                [[28.610164, -106.069948], [28.609713, -106.070273], [28.609166, -106.069309], [28.609624, -106.068989]]
             ],
             color: "fuchsia",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/99BTGCmxS5XvyntE9"
+            link: "https://maps.app.goo.gl/W1ungaRS566Ubtz19"
         },
         {
             id: "Cuadra4_Territorio30",
             coords: [
-                [[28.614563, -106.081128], [28.614162, -106.081401], [28.613665, -106.080549], [28.614082, -106.080257], [28.614552, -106.081088]]
+                [[28.609674, -106.070301], [28.609275, -106.070587], [28.609023, -106.070092], [28.608738, -106.069614], [28.609123, -106.069346]]
             ],
             color: "fuchsia",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/pFUxPb2rb96AJcv18"
+            link: "https://maps.app.goo.gl/QdHC4v7qbHDJEcq46"
         }
     ],
 };
@@ -62,7 +62,7 @@ var territorio30 = territorio30Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio30.poligonos.find(p => p.id === "Cuadra3_Territorio30");
+var polFijo = datosTerritorio30.poligonos.find(p => p.id === "Cuadra2_Territorio30"); // Usamos polígono 2 para centrar
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio30 = L.marker(centro, {

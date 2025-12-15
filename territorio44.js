@@ -9,57 +9,46 @@ var datosTerritorio44 = {
         {
             id: "Cuadra1_Territorio44",
             coords: [
-                [[28.608374, -106.066888], [28.607522, -106.067500], [28.607275, -106.067028], [28.608105, -106.066409]]
+                [[28.608635, -106.071880], [28.608891, -106.072342], [28.608051, -106.072945], [28.607774, -106.072468]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/qLnanZaLcrSnzZD89"
+            link: "https://maps.app.goo.gl/XmjTo9vzTVBuWhKw7"
         },
         {
             id: "Cuadra2_Territorio44",
             coords: [
-                [[28.608069, -106.066347], [28.607790, -106.065905], [28.606962, -106.066508], [28.607238, -106.066980]]
+                [[28.608609, -106.071828], [28.607750, -106.072423], [28.607501, -106.071967], [28.608344, -106.071366]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/YQfyUw7d9pHNqGHz5"
+            link: "https://maps.app.goo.gl/jdFw2594AtK8r9wG8"
         },
         {
             id: "Cuadra3_Territorio44",
             coords: [
-                [[28.607766, -106.065850], [28.607500, -106.065453], [28.607466, -106.065442], [28.607433, -106.065453], [28.606671, -106.065999], [28.606937, -106.066464]]
+                [[28.608315, -106.071316], [28.607460, -106.071927], [28.607197, -106.071442], [28.608043, -106.070825]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/26iHCLFpHGx3ptWdA"
+            link: "https://maps.app.goo.gl/jdFw2594AtK8r9wG8"
         },
         {
             id: "Cuadra4_Territorio44",
             coords: [
-                [[28.606644, -106.065955], [28.606361, -106.065537], [28.607078, -106.065053], [28.607449, -106.065380]]
+                [[28.608018, -106.070770], [28.607167, -106.071397], [28.606909, -106.070921], [28.607770, -106.070304]]
             ],
-            color: "rgba(221, 210, 0, 1)",
+            color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/Rs2KuPrGYV72eQGd9"
-        },
-        {
-            id: "Cuadra5_Territorio44",
-            coords: [
-                [[28.606763, -106.065204], [28.606329, -106.065478], [28.606179, -106.065248]]
-            ],
-            color: "rgba(221, 210, 0, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/HySgvsukXzr8C2NH9"
+            link: "https://maps.app.goo.gl/cLoQPAbPnuMbFb6x9"
         }
     ],
 };

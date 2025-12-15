@@ -9,57 +9,46 @@ var datosTerritorio37 = {
         {
             id: "Cuadra1_Territorio37",
             coords: [
-                [[28.607477, -106.067540], [28.607221, -106.067054], [28.606367, -106.067719], [28.606616, -106.068155]]
+                [[28.612810, -106.078098], [28.612459, -106.078355], [28.611904, -106.077428], [28.612276, -106.077154]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/qWLWxRETbw6HXn3E9"
+            link: "https://maps.app.goo.gl/y3M8YpNQ8FfvVgCGA"
         },
         {
             id: "Cuadra2_Territorio37",
             coords: [
-                [[28.607198, -106.067011], [28.606923, -106.066539], [28.606045, -106.067174], [28.606342, -106.067671]]
+                [[28.613292, -106.077742], [28.612868, -106.078058], [28.612319, -106.077109], [28.612746, -106.076790]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/VnWMAcx5Eb4wwHfs9"
+            link: "https://maps.app.goo.gl/dqSoNrzCYDpiTXYh8"
         },
         {
             id: "Cuadra3_Territorio37",
             coords: [
-                [[28.606900, -106.066494], [28.606633, -106.066025], [28.605752, -106.066675], [28.606018, -106.067132]]
+                [[28.612706, -106.076743], [28.611867, -106.077363], [28.611639, -106.076936], [28.612462, -106.076303]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/3Ht7muzhHYbC5go59"
+            link: "https://maps.app.goo.gl/zXG2S8cuUz8ewSgR9"
         },
         {
             id: "Cuadra4_Territorio37",
             coords: [
-                [[28.606596, -106.065981], [28.606320, -106.065588], [28.606295, -106.065582], [28.605483, -106.066164], [28.605729, -106.066612]]
+                [[28.612425, -106.076237], [28.611598, -106.076871], [28.611346, -106.076428], [28.612187, -106.075808]]
             ],
-            color: "rgba(255, 7, 7, 1)",
+            color: "rgba(221, 210, 0, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/eZWJTtxjtdPMbacAA"
-        },
-        {
-            id: "Cuadra5_Territorio37",
-            coords: [
-                [[28.606272, -106.065495], [28.605450, -106.066090], [28.605117, -106.065495], [28.605566, -106.065189], [28.605758, -106.065547], [28.606145, -106.065271]]
-            ],
-            color: "rgba(255, 7, 7, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/xXnof3AHqVqEa9Wa6"
+            link: "https://maps.app.goo.gl/HRHk2QmstbtKXMu27"
         }
     ],
 };

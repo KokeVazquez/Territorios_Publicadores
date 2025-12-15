@@ -9,68 +9,46 @@ var datosTerritorio57 = {
         {
             id: "Cuadra1_Territorio57",
             coords: [
-                [[28.615825, -106.073098], [28.615543, -106.072603], [28.614672, -106.073222], [28.614957, -106.073720]]
+                [[28.606367, -106.071194], [28.605955, -106.071513], [28.605415, -106.070589], [28.605848, -106.070285]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/16HnDR3ihLodYkKx5"
+            link: "https://maps.app.goo.gl/DC7giDYL5TbpnVgU8"
         },
         {
             id: "Cuadra2_Territorio57",
             coords: [
-                [[28.615509, -106.072546], [28.615250, -106.072116], [28.614389, -106.072718], [28.614638, -106.073162]]
+                [[28.606813, -106.070874], [28.606413, -106.071155], [28.605894, -106.070246], [28.606278, -106.069955]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/j64oUH9amxTmYBGo6"
+            link: "https://maps.app.goo.gl/cqdU6nAqBw79qYsS7"
         },
         {
             id: "Cuadra3_Territorio57",
             coords: [
-                [[28.616048, -106.072153], [28.616384, -106.072673], [28.615875, -106.073062], [28.615303, -106.072082], [28.615796, -106.071739]]
+                [[28.606249, -106.069891], [28.605857, -106.070195], [28.605317, -106.069217], [28.605688, -106.068940]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/6jxZvfAFeLLQnKbN9"
+            link: "https://maps.app.goo.gl/QXcj4KpKmpqm4r4M6"
         },
         {
             id: "Cuadra4_Territorio57",
             coords: [
-                [[28.616433, -106.072632], [28.616122, -106.072158], [28.616126, -106.072086], [28.616154, -106.072039], [28.616187, -106.072016], [28.616814, -106.072316]]
+                [[28.605810, -106.070227], [28.605377, -106.070537], [28.604846, -106.069538], [28.605265, -106.069251]]
             ],
             color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/h6BiU4efBWvzSZFJ8"
-        },
-        {
-            id: "Cuadra5_Territorio57",
-            coords: [
-                [[28.616856, -106.072262], [28.617256, -106.071963], [28.616954, -106.071437], [28.616241, -106.071972]]
-            ],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/Bwf38TQerWPrNcyv5"
-        },
-        {
-            id: "Cuadra6_Territorio57",
-            coords: [
-                [[28.616922, -106.071390], [28.616703, -106.071035], [28.615876, -106.071668], [28.616179, -106.071936]]
-            ],
-            color: "rgba(35, 168, 14, 1)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "6",
-            link: "https://maps.app.goo.gl/3nc14nTFYK5SEEpq8"
+            link: "https://maps.app.goo.gl/aaqpKQi1636EDNuj7"
         }
     ],
 };

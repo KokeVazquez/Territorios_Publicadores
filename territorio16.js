@@ -9,56 +9,46 @@ var datosTerritorio16 = {
         {
             id: "Cuadra1_Territorio16",
             coords: [
-                [[28.612627, -106.081120], [28.611768, -106.081755], [28.611504, -106.081300], [28.612367, -106.080691]]
+                [[28.611115, -106.064872], [28.610829, -106.064379], [28.610191, -106.065363], [28.610273, -106.065501]]
             ],
             color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/cYZSMEzSvVF3beEi8"
+            link: "https://maps.app.goo.gl/VTUNYKgvzJ9pn6hf9"
         },
         {
             id: "Cuadra2_Territorio16",
             coords: [
-                [[28.612327, -106.080642], [28.611479, -106.081263], [28.611207, -106.080784], [28.612055, -106.080165]]
+                [[28.611158, -106.064847], [28.610855, -106.064341], [28.611305, -106.063621], [28.611729, -106.064420]]
             ],
             color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/8DDyzDQApaNGJg3Y7"
+            link: "https://maps.app.goo.gl/TGofCLY69XREuacC6"
         },
         {
             id: "Cuadra3_Territorio16",
             coords: [
-                [[28.611179, -106.080728], [28.612023, -106.080102], [28.611772, -106.079666], [28.610935, -106.080279]]
+                [[28.612186, -106.064101], [28.611775, -106.064397], [28.611330, -106.063583], [28.611602, -106.063184], [28.611649, -106.063130]]
             ],
             color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/Q3pULjcEnxkWxXNy8"
+            link: "https://maps.app.goo.gl/ASaJUFGACM8hkZWf6"
         },
         {
             id: "Cuadra4_Territorio16",
             coords: [
-                [[28.611738, -106.079604], [28.611503, -106.079182], [28.610660, -106.079800], [28.610899, -106.080227]]],
+                [[28.612634, -106.063786], [28.612220, -106.064078], [28.611677, -106.063098], [28.611755, -106.063017], [28.612083, -106.062784]]
+            ],
             color: "rgb(64,224,208)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/BUoB8rUPn3gh6moM7"
-        },
-        {
-            id: "Escuela",
-            coords: [
-                [[28.613201, -106.082124], [28.612332, -106.082754], [28.611839, -106.081882], [28.612699, -106.081259]]
-            ],
-            color: "rgba(70, 44, 11, 1)",
-            fillOpacity: 1.0,
-            weight: 2,
-            label: "Escuela",
-            link: "https://maps.app.goo.gl/DCdBfeBLiPi4g2Hn7"
+            link: "https://maps.app.goo.gl/3vRDS2otgNTGqTo98"
         }
     ],
 };
@@ -72,7 +62,7 @@ var territorio16 = territorio16Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio16.poligonos.find(p => p.id === "Cuadra3_Territorio16");
+var polFijo = datosTerritorio16.poligonos.find(p => p.id === "Cuadra2_Territorio16");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio16 = L.marker(centro, {

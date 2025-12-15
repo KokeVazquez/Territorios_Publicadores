@@ -9,46 +9,35 @@ var datosTerritorio18 = {
         {
             id: "Cuadra1_Territorio18",
             coords: [
-                [[28.610344, -106.077095], [28.609504, -106.077705], [28.609219, -106.077221], [28.610064, -106.076630]]
+                [[28.612560, -106.069647], [28.612005, -106.068675], [28.611157, -106.069301], [28.611728, -106.070261]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/mYZBBLUZQ6YrXP9V9"
+            link: "https://maps.app.goo.gl/2sWnrVSAyitk9Umg9"
         },
         {
             id: "Cuadra2_Territorio18",
             coords: [
-                [[28.610029, -106.076565], [28.609181, -106.077161], [28.608902, -106.076682], [28.609744, -106.076071]]
+                [[28.611970, -106.068631], [28.611694, -106.068174], [28.610848, -106.068792], [28.611121, -106.069242]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/2TcF3S7v13MYGDvm9"
+            link: "https://maps.app.goo.gl/YbwpYfRzFnseRZq99"
         },
         {
             id: "Cuadra3_Territorio18",
             coords: [
-                [[28.609715, -106.076014], [28.608868, -106.076620], [28.608601, -106.076189], [28.609459, -106.075570]]
+                [[28.611658, -106.068119], [28.611405, -106.067677], [28.610563, -106.068286], [28.610815, -106.068734]]
             ],
-            color: "fuchsia",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/dn9ytiLhg3KkkpeS7"
-        },
-        {
-            id: "Cuadra4_Territorio18",
-            coords: [
-                [[28.609422, -106.075510], [28.608566, -106.076134], [28.608321, -106.075711], [28.609168, -106.075078]]
-            ],
-            color: "fuchsia",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "4",
-            link: "https://maps.app.goo.gl/TvZSeFAJVM9DoXKy5"
+            link: "https://maps.app.goo.gl/zGFvXokM3zGXE9zE7"
         }
     ],
 };
@@ -62,7 +51,7 @@ var territorio18 = territorio18Data.grupo;
 // ------------------------------
 // Crear marcador inicial del territorio (número)
 // ------------------------------
-var polFijo = datosTerritorio18.poligonos.find(p => p.id === "Cuadra3_Territorio18");
+var polFijo = datosTerritorio18.poligonos.find(p => p.id === "Cuadra2_Territorio18");
 var centro = L.polygon(polFijo.coords).getBounds().getCenter();
 
 var marcadorTerritorio18 = L.marker(centro, {

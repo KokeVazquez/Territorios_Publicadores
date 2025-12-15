@@ -9,57 +9,46 @@ var datosTerritorio45 = {
         {
             id: "Cuadra1_Territorio45",
             coords: [
-                [[28.615674, -106.078897], [28.615397, -106.079100], [28.615144, -106.078621], [28.615701, -106.078228]]
+                [[28.610033, -106.074333], [28.609170, -106.074961], [28.608922, -106.074515], [28.609776, -106.073891]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "1",
-            link: "https://maps.app.goo.gl/rraYgYAPpfvAP29z8"
+            link: "https://maps.app.goo.gl/MHDGRXoPsGRaQQTy5"
         },
         {
             id: "Cuadra2_Territorio45",
             coords: [
-                [[28.615720, -106.078084], [28.615740, -106.077526], [28.615711, -106.077479], [28.614875, -106.078118], [28.615093, -106.078529]]
+                [[28.609748, -106.073842], [28.608894, -106.074465], [28.608641, -106.073997], [28.609497, -106.073390]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "2",
-            link: "https://maps.app.goo.gl/fjzAw4egV9G5v7f4A"
+            link: "https://maps.app.goo.gl/2ceJ7D3XLvXpdpbx8"
         },
         {
             id: "Cuadra3_Territorio45",
             coords: [
-                [[28.615676, -106.077418], [28.615423, -106.076974], [28.614579, -106.077599], [28.614840, -106.078052]]
+                [[28.609445, -106.073315], [28.608601, -106.073925], [28.608352, -106.073472], [28.609196, -106.072882]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "3",
-            link: "https://maps.app.goo.gl/QiU2no8PkUnyjdNN7"
+            link: "https://maps.app.goo.gl/xPKPCKfrJzsqnYcc9"
         },
         {
             id: "Cuadra4_Territorio45",
             coords: [
-                [[28.615398, -106.076936], [28.615152, -106.076505], [28.614298, -106.077125], [28.614554, -106.077553]]
+                [[28.609159, -106.072822], [28.608323, -106.073414], [28.608092, -106.072992], [28.608912, -106.072406]]
             ],
-            color: "rgb(64,224,208)",
+            color: "rgba(35, 168, 14, 1)",
             fillOpacity: 0.8,
             weight: 2,
             label: "4",
-            link: "https://maps.app.goo.gl/5cy2xwS5VuVVNtxm6"
-        },
-        {
-            id: "Cuadra5_Territorio45",
-            coords: [
-                [[28.615746, -106.077411], [28.615206, -106.076464], [28.615803, -106.076035]]
-            ],
-            color: "rgb(64,224,208)",
-            fillOpacity: 0.8,
-            weight: 2,
-            label: "5",
-            link: "https://maps.app.goo.gl/dEqB1kFhyJUsFoxk9"
+            link: "https://maps.app.goo.gl/96hYEyJtjHgG5ugz8"
         }
     ],
 };
